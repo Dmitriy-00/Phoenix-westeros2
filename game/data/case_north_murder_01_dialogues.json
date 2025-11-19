@@ -1,0 +1,278 @@
+{
+  "dialogue_id": "case_01_intro",
+  "nodes": [
+    {
+      "id": "start",
+      "speaker_id": "char_lord_north",
+      "emotion": "angry",
+      "text": "Наконец-то! Я требовал расследователя три дня назад. Посол дома Золотой Гребень мёртв в моей крепости, и это может привести к войне!",
+      "choices": [
+        {
+          "text": "Расскажите мне, что произошло, милорд.",
+          "next_node": "lord_explains",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "text": "Я понимаю серьёзность ситуации. Кто нашёл тело?",
+          "next_node": "who_found_body",
+          "conditions": [],
+          "effects": [
+            {"type": "modify_relationship", "character": "char_lord_north", "amount": 5}
+          ]
+        },
+        {
+          "text": "Три дня - это долго. Улики могли быть уничтожены.",
+          "next_node": "complain_delay",
+          "conditions": [],
+          "effects": [
+            {"type": "modify_relationship", "character": "char_lord_north", "amount": -5}
+          ]
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "lord_explains",
+      "speaker_id": "char_lord_north",
+      "emotion": "sad",
+      "text": "Три ночи назад посол Южного дома прибыл для переговоров. Он был найден мёртвым в своих покоях на следующее утро. Отравлен, судя по всему.",
+      "choices": [
+        {
+          "text": "Были ли у вас враги на Юге?",
+          "next_node": "enemies_question",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "text": "Кто имел доступ к его покоям?",
+          "next_node": "access_question",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "text": "Я начну расследование немедленно.",
+          "next_node": "start_investigation",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "who_found_body",
+      "speaker_id": "char_lord_north",
+      "emotion": "neutral",
+      "text": "Моя дочь, леди Айрис. Она хотела пригласить посла на утреннюю прогулку, но... нашла его мёртвым.",
+      "choices": [
+        {
+          "text": "Мне нужно поговорить с ней.",
+          "next_node": "talk_to_heir",
+          "conditions": [],
+          "effects": [
+            {"type": "set_flag", "flag": "know_heir_found_body", "value": true}
+          ]
+        },
+        {
+          "text": "Как она восприняла это?",
+          "next_node": "heir_reaction",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "complain_delay",
+      "speaker_id": "char_lord_north",
+      "emotion": "angry",
+      "text": "Вы думаете, я этого не знаю?! Корона тянула с назначением! Так что займитесь делом вместо того, чтобы обвинять меня!",
+      "choices": [
+        {
+          "text": "Простите, милорд. Начнём расследование.",
+          "next_node": "start_investigation",
+          "conditions": [],
+          "effects": [
+            {"type": "modify_relationship", "character": "char_lord_north", "amount": 3}
+          ]
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "enemies_question",
+      "speaker_id": "char_lord_north",
+      "emotion": "thoughtful",
+      "text": "Враги? У каждого северного дома есть недоброжелатели на Юге. Но убить посла в моём доме - это значит обвинить меня в предательстве.",
+      "choices": [
+        {
+          "text": "Именно поэтому убийца выбрал это место.",
+          "next_node": "clever_observation",
+          "conditions": [],
+          "effects": [
+            {"type": "modify_relationship", "character": "char_lord_north", "amount": 8}
+          ]
+        },
+        {
+          "text": "Расскажите мне о доме Золотой Гребень.",
+          "next_node": "about_goldcrest",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "access_question",
+      "speaker_id": "char_lord_north",
+      "emotion": "neutral",
+      "text": "Башня гостей охранялась. Только члены моей семьи, мейстер и слуги могли войти.",
+      "choices": [
+        {
+          "text": "Мне нужны имена всех, кто был в башне той ночью.",
+          "next_node": "get_names_list",
+          "conditions": [],
+          "effects": [
+            {"type": "set_flag", "flag": "know_access_list", "value": true}
+          ]
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "start_investigation",
+      "speaker_id": "char_lord_north",
+      "emotion": "neutral",
+      "text": "Делайте что должны. Мейстер Корвин поможет вам. Он осмотрел тело и покои.",
+      "choices": [
+        {
+          "text": "Я начну с осмотра места преступления.",
+          "next_node": "end",
+          "conditions": [],
+          "effects": [
+            {"type": "unlock_location", "location_id": "loc_stormhold_keep"},
+            {"type": "set_flag", "flag": "investigation_started", "value": true}
+          ]
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "talk_to_heir",
+      "speaker_id": "char_lord_north",
+      "emotion": "sad",
+      "text": "Она в библиотеке. Это... тяжело для неё. Первый раз видеть мёртвого.",
+      "choices": [
+        {
+          "text": "Я буду осторожен в расспросах.",
+          "next_node": "start_investigation",
+          "conditions": [],
+          "effects": [
+            {"type": "modify_relationship", "character": "char_lord_north", "amount": 5}
+          ]
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "clever_observation",
+      "speaker_id": "char_lord_north",
+      "emotion": "shocked",
+      "text": "Вы правы... Кто-то хочет стравить нас с Югом. Найдите этого ублюдка!",
+      "choices": [
+        {
+          "text": "Я сделаю всё возможное.",
+          "next_node": "start_investigation",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "about_goldcrest",
+      "speaker_id": "char_lord_north",
+      "emotion": "angry",
+      "text": "Богатые змеи. Торгуют влиянием при дворе. Но даже они не настолько глупы, чтобы убить собственного посла.",
+      "choices": [
+        {
+          "text": "Если только не хотят развязать войну...",
+          "next_node": "war_theory",
+          "conditions": [],
+          "effects": [
+            {"type": "set_flag", "flag": "know_war_theory", "value": true}
+          ]
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "war_theory",
+      "speaker_id": "char_lord_north",
+      "emotion": "thoughtful",
+      "text": "Война выгодна торговцам и Церкви. Им есть что продать обеим сторонам. Проверьте эту версию.",
+      "choices": [
+        {
+          "text": "Обязательно. Начинаю расследование.",
+          "next_node": "start_investigation",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "get_names_list",
+      "speaker_id": "char_lord_north",
+      "emotion": "neutral",
+      "text": "Я, моя дочь Айрис, мейстер Корвин, и трое слуг. Все проверены и верны мне годами.",
+      "choices": [
+        {
+          "text": "Годы преданности могут купить одной ночью предательства.",
+          "next_node": "lord_upset",
+          "conditions": [],
+          "effects": [
+            {"type": "modify_relationship", "character": "char_lord_north", "amount": -8}
+          ]
+        },
+        {
+          "text": "Спасибо. Я поговорю с каждым.",
+          "next_node": "start_investigation",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "lord_upset",
+      "speaker_id": "char_lord_north",
+      "emotion": "angry",
+      "text": "Как смеете! Эти люди - моя семья! Но... делайте свою работу. Только не обвиняйте без доказательств.",
+      "choices": [
+        {
+          "text": "Доказательства - это всё, что меня интересует.",
+          "next_node": "start_investigation",
+          "conditions": [],
+          "effects": [
+            {"type": "modify_relationship", "character": "char_lord_north", "amount": 5}
+          ]
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    }
+  ]
+}

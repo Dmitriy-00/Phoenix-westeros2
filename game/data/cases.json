@@ -1,0 +1,113 @@
+{
+  "cases": [
+    {
+      "id": "case_north_murder_01",
+      "title": "Тень над Стормхолдом",
+      "short_description": "Убийство высокопоставленного гостя в крепости Стормхолд грозит разжечь войну между Севером и Югом. Вы должны найти убийцу, прежде чем кровь прольётся реками.",
+      "difficulty": 2,
+      "starting_location_id": "loc_stormhold_keep",
+      "allowed_locations": [
+        "loc_stormhold_keep",
+        "loc_north_village",
+        "loc_capital_city",
+        "loc_light_cathedral",
+        "loc_grand_library"
+      ],
+      "key_characters": [
+        "char_lord_north",
+        "char_heir_north",
+        "char_maester_tower",
+        "char_cardinal_south"
+      ],
+      "required_clues_to_solve": [
+        "clue_bloody_letter",
+        "clue_poisoned_wine",
+        "clue_gold_coins"
+      ],
+      "endings": [
+        {
+          "id": "ending_true_justice",
+          "name": "Истинное Правосудие",
+          "conditions": {
+            "correct_accusation": true,
+            "faction_balance_ok": true
+          },
+          "description": "Истинный убийца разоблачён - мейстер Корвин действовал по приказу южных интриганов. Доказательства неопровержимы, но политическая цена высока. Отношения с домом Золотой Гребень испорчены, но честь Севера восстановлена.",
+          "effects": [
+            {"type": "modify_reputation", "faction": "fact_house_stormhold", "amount": 30},
+            {"type": "modify_reputation", "faction": "fact_house_goldcrest", "amount": -40},
+            {"type": "modify_relationship", "character": "char_lord_north", "amount": 25},
+            {"type": "set_flag", "flag": "case_01_solved_correctly", "value": true}
+          ]
+        },
+        {
+          "id": "ending_scapegoat",
+          "name": "Козёл Отпущения",
+          "conditions": {
+            "wrong_accusation": true
+          },
+          "description": "Невиновный человек казнён, чтобы удовлетворить жажду мести. Истинный заговор остаётся нераскрытым, и тени продолжают собираться над королевством.",
+          "effects": [
+            {"type": "modify_reputation", "faction": "fact_house_stormhold", "amount": -20},
+            {"type": "modify_relationship", "character": "char_lord_north", "amount": -30},
+            {"type": "set_flag", "flag": "case_01_innocent_executed", "value": true}
+          ]
+        },
+        {
+          "id": "ending_political_compromise",
+          "name": "Политический Компромисс",
+          "conditions": {
+            "accusation_hidden": true
+          },
+          "description": "Истина известна, но преданна забвению ради политической стабильности. Убийца уходит безнаказанным, но война предотвращена. Какой ценой?",
+          "effects": [
+            {"type": "modify_reputation", "faction": "fact_house_stormhold", "amount": -10},
+            {"type": "modify_reputation", "faction": "fact_house_goldcrest", "amount": 10},
+            {"type": "modify_reputation", "faction": "fact_crown", "amount": 15},
+            {"type": "modify_relationship", "character": "char_lord_north", "amount": -20},
+            {"type": "set_flag", "flag": "case_01_compromise", "value": true}
+          ]
+        },
+        {
+          "id": "ending_church_intervention",
+          "name": "Вмешательство Церкви",
+          "conditions": {
+            "church_accused": true
+          },
+          "description": "Вы обвиняете Церковь Вечного Света в организации убийства. Кардинал Малахий отрицает всё, но его влияние пошатнулось. Впрочем, теперь у вас появился могущественный враг.",
+          "effects": [
+            {"type": "modify_reputation", "faction": "fact_eternal_light", "amount": -50},
+            {"type": "modify_reputation", "faction": "fact_scholars_circle", "amount": 20},
+            {"type": "modify_relationship", "character": "char_cardinal_south", "amount": -60},
+            {"type": "set_flag", "flag": "case_01_church_enemy", "value": true}
+          ]
+        }
+      ],
+      "current_stage": 0,
+      "completed": false,
+      "discovered_clues": [],
+      "flags": {}
+    },
+    {
+      "id": "case_port_conspiracy",
+      "title": "Заговор в Нептаре",
+      "short_description": "Таинственные убийства торговцев в портовом городе угрожают экономике всего королевства. Гильдия требует расследования.",
+      "difficulty": 3,
+      "starting_location_id": "loc_port_city",
+      "allowed_locations": [
+        "loc_port_city",
+        "loc_trade_hub",
+        "loc_capital_city"
+      ],
+      "key_characters": [
+        "char_merchant_prince"
+      ],
+      "required_clues_to_solve": [],
+      "endings": [],
+      "current_stage": 0,
+      "completed": false,
+      "discovered_clues": [],
+      "flags": {}
+    }
+  ]
+}

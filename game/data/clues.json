@@ -1,0 +1,81 @@
+{
+  "clues": [
+    {
+      "id": "clue_bloody_letter",
+      "name": "Кровавое письмо",
+      "type": "document",
+      "description": "Письмо, испачканное кровью, найдено в покоях убитого. Текст частично размыт, но видны упоминания о 'предательстве' и 'золоте юга'.",
+      "reliability": 80,
+      "related_characters": ["char_lord_north", "char_maester_tower"],
+      "related_locations": ["loc_stormhold_keep"],
+      "tags": ["угроза", "заговор", "ночь убийства"],
+      "discovered": false
+    },
+    {
+      "id": "clue_witness_night_guard",
+      "name": "Показания ночного стража",
+      "type": "testimony",
+      "description": "Стражник клянётся, что видел фигуру в мантии мейстера, выходящую из башни около полуночи.",
+      "reliability": 60,
+      "related_characters": ["char_maester_tower"],
+      "related_locations": ["loc_stormhold_keep"],
+      "tags": ["свидетель", "ночь убийства", "подозрительно"],
+      "discovered": false
+    },
+    {
+      "id": "clue_poisoned_wine",
+      "name": "Отравленное вино",
+      "type": "item",
+      "description": "Кубок с остатками вина содержит редкий яд из южных земель. Такой яд могли достать только богатые торговцы или знать.",
+      "reliability": 90,
+      "related_characters": ["char_merchant_prince"],
+      "related_locations": ["loc_stormhold_keep", "loc_port_city"],
+      "tags": ["яд", "южные земли", "убийство"],
+      "discovered": false
+    },
+    {
+      "id": "clue_gold_coins",
+      "name": "Золотые монеты",
+      "type": "item",
+      "description": "Мешочек с золотыми монетами, найденный в башне мейстера. На монетах герб дома Золотой Гребень.",
+      "reliability": 85,
+      "related_characters": ["char_maester_tower"],
+      "related_locations": ["loc_stormhold_keep"],
+      "tags": ["взятка", "южные земли", "предательство"],
+      "discovered": false
+    },
+    {
+      "id": "clue_secret_passage",
+      "name": "Тайный проход",
+      "type": "location",
+      "description": "Обнаружен скрытый проход из подземелья, ведущий за пределы крепости. Недавно использовался.",
+      "reliability": 95,
+      "related_characters": [],
+      "related_locations": ["loc_stormhold_keep"],
+      "tags": ["побег", "заговор", "тайна"],
+      "discovered": false
+    },
+    {
+      "id": "clue_torn_emblem",
+      "name": "Разорванный герб",
+      "type": "item",
+      "description": "Кусок ткани с гербом дома Стормхолд, найденный в тайном проходе. Похоже, кто-то пытался его уничтожить.",
+      "reliability": 70,
+      "related_characters": ["char_heir_north"],
+      "related_locations": ["loc_stormhold_keep"],
+      "tags": ["предательство", "семейная вражда"],
+      "discovered": false
+    },
+    {
+      "id": "clue_church_blessing",
+      "name": "Церковное благословение",
+      "type": "document",
+      "description": "Официальное письмо от кардинала Малахия, гарантирующее 'защиту Церкви' тому, кто 'очистит Север от ереси'.",
+      "reliability": 75,
+      "related_characters": ["char_cardinal_south"],
+      "related_locations": ["loc_light_cathedral"],
+      "tags": ["церковь", "заговор", "религия"],
+      "discovered": false
+    }
+  ]
+}
