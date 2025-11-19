@@ -1,0 +1,175 @@
+{
+  "characters": [
+    {
+      "id": "char_lord_north",
+      "name": "Лорд Эйден Стормхолд",
+      "title": "Хранитель Севера",
+      "faction_id": "fact_house_stormhold",
+      "description": "Суровый правитель холодных земель, известный своей честностью и упрямством. Подозрителен к столичным интригам и предпочитает прямоту дипломатии.",
+      "base_relationship": 0,
+      "current_relationship": 0,
+      "traits": ["гордый", "честный", "упрямый", "справедливый"],
+      "emotion_sprites": {
+        "neutral": "char_lord_north_neutral",
+        "angry": "char_lord_north_angry",
+        "sad": "char_lord_north_sad",
+        "smug": "char_lord_north_smug",
+        "shocked": "char_lord_north_shocked",
+        "fearful": "char_lord_north_fearful"
+      },
+      "is_alive": true,
+      "location_id": "loc_stormhold_keep"
+    },
+    {
+      "id": "char_heir_north",
+      "name": "Леди Айрис Стормхолд",
+      "title": "Наследница Севера",
+      "faction_id": "fact_house_stormhold",
+      "description": "Дочь лорда Эйдена, умная и амбициозная. В отличие от отца, видит ценность в политических играх столицы.",
+      "base_relationship": 10,
+      "current_relationship": 10,
+      "traits": ["умная", "амбициозная", "хитрая", "образованная"],
+      "emotion_sprites": {
+        "neutral": "char_heir_neutral",
+        "angry": "char_heir_angry",
+        "sad": "char_heir_sad",
+        "smug": "char_heir_smug",
+        "shocked": "char_heir_shocked"
+      },
+      "is_alive": true,
+      "location_id": "loc_stormhold_keep"
+    },
+    {
+      "id": "char_maester_tower",
+      "name": "Мейстер Корвин",
+      "title": "Советник Севера",
+      "faction_id": "fact_scholars_circle",
+      "description": "Пожилой мейстер, служащий дому Стормхолд уже тридцать лет. Хранитель знаний и тайн.",
+      "base_relationship": 5,
+      "current_relationship": 5,
+      "traits": ["мудрый", "осторожный", "любопытный", "лояльный"],
+      "emotion_sprites": {
+        "neutral": "char_maester_neutral",
+        "angry": "char_maester_angry",
+        "sad": "char_maester_sad",
+        "thoughtful": "char_maester_thoughtful",
+        "shocked": "char_maester_shocked"
+      },
+      "is_alive": true,
+      "location_id": "loc_stormhold_keep"
+    },
+    {
+      "id": "char_cardinal_south",
+      "name": "Кардинал Малахий",
+      "title": "Глава Церкви Вечного Света",
+      "faction_id": "fact_eternal_light",
+      "description": "Харизматичный и влиятельный лидер религиозного ордена. Его слово имеет вес во всём королевстве.",
+      "base_relationship": -10,
+      "current_relationship": -10,
+      "traits": ["харизматичный", "фанатичный", "властный", "манипулятивный"],
+      "emotion_sprites": {
+        "neutral": "char_cardinal_neutral",
+        "angry": "char_cardinal_angry",
+        "smug": "char_cardinal_smug",
+        "pious": "char_cardinal_pious",
+        "shocked": "char_cardinal_shocked"
+      },
+      "is_alive": true,
+      "location_id": "loc_light_cathedral"
+    },
+    {
+      "id": "char_merchant_prince",
+      "name": "Торговый князь Валериан",
+      "title": "Глава Гильдии Восточных Торговцев",
+      "faction_id": "fact_merchants_guild",
+      "description": "Богатейший человек королевства, контролирующий морские торговые пути. Нейтрален в политических играх, но его золото решает судьбы.",
+      "base_relationship": 0,
+      "current_relationship": 0,
+      "traits": ["расчётливый", "богатый", "прагматичный", "обаятельный"],
+      "emotion_sprites": {
+        "neutral": "char_merchant_neutral",
+        "smug": "char_merchant_smug",
+        "angry": "char_merchant_angry",
+        "thoughtful": "char_merchant_thoughtful"
+      },
+      "is_alive": true,
+      "location_id": "loc_port_city"
+    },
+    {
+      "id": "char_captain_ironhand",
+      "name": "Капитан Бронислав Железная Длань",
+      "title": "Капитан городской стражи Нептары",
+      "faction_id": "fact_city_guard",
+      "description": "Бывший моряк, ставший стражником. Шрам через всё лицо и железный крюк вместо правой руки - напоминания о прошлых битвах. Прямолинейный и честный, но не отличается изобретательностью. Предпочитает очевидные решения сложным расследованиям.",
+      "base_relationship": 0,
+      "current_relationship": 0,
+      "traits": ["честный", "прямолинейный", "упрямый", "храбрый"],
+      "emotion_sprites": {
+        "neutral": "char_captain_neutral",
+        "angry": "char_captain_angry",
+        "sad": "char_captain_sad",
+        "smug": "char_captain_smug",
+        "shocked": "char_captain_shocked"
+      },
+      "is_alive": true,
+      "location_id": "loc_port_city"
+    },
+    {
+      "id": "char_lady_isabella",
+      "name": "Леди Изабелла Волнорез",
+      "title": "Вдова торговца",
+      "faction_id": "fact_merchants_guild",
+      "description": "Молодая вдова Маркуса Волнореза, первой жертвы серии убийств. Красивая и образованная, она скорбит о муже, но в глубине души облегчена, что его тайны могут быть похоронены вместе с ним. Играет роль горюющей супруги, скрывая знание о контрабанде мужа.",
+      "base_relationship": -10,
+      "current_relationship": -10,
+      "traits": ["умная", "скрытная", "образованная", "расчётливая"],
+      "emotion_sprites": {
+        "neutral": "char_isabella_neutral",
+        "angry": "char_isabella_angry",
+        "sad": "char_isabella_sad",
+        "fearful": "char_isabella_fearful",
+        "shocked": "char_isabella_shocked"
+      },
+      "is_alive": true,
+      "location_id": "loc_port_city"
+    },
+    {
+      "id": "char_brother_theodore",
+      "name": "Брат Теодор Праведный",
+      "title": "Инквизитор Церкви Вечного Света",
+      "faction_id": "fact_eternal_light",
+      "description": "Фанатичный инквизитор, возглавляющий тайное подразделение Церкви - 'Очистителей'. Холодный взгляд и шрамы от самобичевания говорят о его абсолютной преданности догматам. Он искренне верит, что убийство еретиков - священный долг, и не испытывает угрызений совести.",
+      "base_relationship": -20,
+      "current_relationship": -20,
+      "traits": ["фанатичный", "безжалостный", "умный", "преданный"],
+      "emotion_sprites": {
+        "neutral": "char_theodore_neutral",
+        "angry": "char_theodore_angry",
+        "smug": "char_theodore_smug",
+        "pious": "char_theodore_pious",
+        "shocked": "char_theodore_shocked"
+      },
+      "is_alive": true,
+      "location_id": "loc_port_city"
+    },
+    {
+      "id": "char_alex_swiftblade",
+      "name": "Алекс 'Быстрый Клинок' Рифовый",
+      "title": "Послушник Церкви",
+      "faction_id": "fact_eternal_light",
+      "description": "Молодой послушник, вступивший в 'Очистителей' из идеализма. Совершил второе и третье убийства по приказу брата Теодора, но теперь мучается совестью. Понимает, что Селина и Ричард были невиновны. Нервный, разочарованный в методах Церкви, готов признаться, если найти к нему правильный подход.",
+      "base_relationship": 0,
+      "current_relationship": 0,
+      "traits": ["молодой", "идеалист", "сомневающийся", "мучается совестью"],
+      "emotion_sprites": {
+        "neutral": "char_alex_neutral",
+        "angry": "char_alex_angry",
+        "sad": "char_alex_sad",
+        "fearful": "char_alex_fearful",
+        "shocked": "char_alex_shocked"
+      },
+      "is_alive": true,
+      "location_id": "loc_port_city"
+    }
+  ]
+}

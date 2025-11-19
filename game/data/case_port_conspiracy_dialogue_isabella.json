@@ -1,0 +1,974 @@
+{
+  "dialogue_id": "dialogue_lady_isabella",
+  "title": "Разговор с Леди Изабеллой Волнорез",
+  "description": "Элегантная вдова принимает вас в своём особняке. Она знает больше, чем говорит, но будет ли она говорить правду?",
+  "location_id": "loc_port_city",
+  "participants": ["player", "char_lady_isabella"],
+  "conditions": {
+    "required_flags": ["investigation_started"],
+    "optional_flags": ["talked_to_captain", "found_contraband_manifest"]
+  },
+  "start_node": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Детектив? Как... неожиданно. Прошу, присаживайтесь. Чай? Нет? Что ж, тогда давайте поговорим о том, что привело вас в мой скромный дом.",
+      "choices": [
+        {
+          "text": "[Вежливо] Благодарю за приём, леди Изабелла. Я расследую убийства торговцев.",
+          "next_node": "polite_approach",
+          "conditions": null
+        },
+        {
+          "text": "[Прямо] Вы знали всех трёх жертв. Расскажите о них.",
+          "next_node": "direct_approach",
+          "conditions": null
+        },
+        {
+          "text": "[Наблюдательно] Прекрасный дом. Товары из-за моря... Редкие книги. Интересная коллекция.",
+          "next_node": "observant_approach",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "polite_approach",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Ах да, эти ужасные убийства. Весь город только об этом и говорит. Бедные Маркус, Селина и капитан Ричард. Такая трагедия.",
+      "effects": [
+        {"type": "modify_relationship", "character": "char_lady_isabella", "amount": 5}
+      ],
+      "choices": [
+        {
+          "text": "Вы были знакомы со всеми тремя?",
+          "next_node": "knew_victims",
+          "conditions": null
+        },
+        {
+          "text": "Есть ли у вас какие-то предположения о мотиве убийц?",
+          "next_node": "motive_question",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "direct_approach",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Прямолинейно. Мне это нравится. Да, я знала их всех. Нептара - небольшой город, детектив. Все богатые торговцы знают друг друга.",
+      "effects": [
+        {"type": "modify_relationship", "character": "char_lady_isabella", "amount": -3}
+      ],
+      "choices": [
+        {
+          "text": "Насколько хорошо вы их знали?",
+          "next_node": "how_well",
+          "conditions": null
+        },
+        {
+          "text": "Что их связывало, кроме богатства?",
+          "next_node": "connection_question",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "observant_approach",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "shocked",
+      "text": "Вы... весьма наблюдательны. Да, я коллекционирую редкости. Мой покойный муж был торговцем. Он привозил мне диковинки со всего света.",
+      "effects": [
+        {"type": "modify_relationship", "character": "char_lady_isabella", "amount": 10},
+        {"type": "set_flag", "flag": "isabella_impressed", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Маркус Волнорез тоже торговал редкостями. Вы были родственниками?",
+          "next_node": "family_connection",
+          "conditions": null
+        },
+        {
+          "text": "Некоторые из этих книг... запрещены Церковью, не так ли?",
+          "next_node": "forbidden_books",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "knew_victims",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "sad",
+      "text": "Да. Маркус был братом моего покойного мужа. Селина - моя близкая подруга. А капитан Ричард... перевозил товары для нашей семьи много лет.",
+      "effects": [
+        {"type": "set_flag", "flag": "know_victims_connected", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Все трое были связаны с вашей семьёй. Это не может быть совпадением.",
+          "next_node": "not_coincidence",
+          "conditions": null
+        },
+        {
+          "text": "Мои соболезнования. Это должно быть тяжело для вас.",
+          "next_node": "sympathy",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "how_well",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Маркус - брат моего покойного мужа. Селина - подруга. Ричард - капитан, который возил товары для моей семьи. Достаточно хорошо.",
+      "effects": [
+        {"type": "set_flag", "flag": "know_victims_connected", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Все они были связаны торговлей через вашу семью.",
+          "next_node": "trade_connection",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "connection_question",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Торговля. Они все работали вместе. Маркус поставлял товары, Селина хранила их на складах, Ричард перевозил. Партнёрство.",
+      "effects": [
+        {"type": "set_flag", "flag": "know_trade_partnership", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Какие именно товары?",
+          "next_node": "what_goods",
+          "conditions": null
+        },
+        {
+          "text": "А вы были частью этого партнёрства?",
+          "next_node": "isabella_part",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "family_connection",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "sad",
+      "text": "Да. Маркус был младшим братом моего мужа. После смерти мужа он... взял на себя заботу о семейном деле. Я всё ещё получаю долю от прибыли.",
+      "effects": [
+        {"type": "set_flag", "flag": "isabella_family_business", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Значит, вы знали о его торговле. О всех его товарах.",
+          "next_node": "knew_contraband_hint",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "forbidden_books",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Я... не знаю, о чём вы говорите. Это просто старинные тома. История, философия. Ничего еретического.",
+      "effects": [
+        {"type": "modify_relationship", "character": "char_lady_isabella", "amount": -10},
+        {"type": "set_flag", "flag": "isabella_nervous_books", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "[Настоять] Леди Изабелла, я вижу трактат о древних богах. Церковь сожгла бы его.",
+          "next_node": "press_books",
+          "conditions": null
+        },
+        {
+          "text": "[Отступить] Конечно. Прошу прощения за бестактность.",
+          "next_node": "back_off_books",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "not_coincidence",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "sad",
+      "text": "Нет... не может быть. Вы думаете, кто-то целенаправленно... но кто? И зачем? Мы просто торговцы!",
+      "choices": [
+        {
+          "text": "Что именно вы продавали?",
+          "next_node": "what_goods",
+          "conditions": null
+        },
+        {
+          "text": "У вас есть враги? Те, кто хотел бы навредить вашей семье?",
+          "next_node": "enemies_question",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "sympathy",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "sad",
+      "text": "Благодарю вас. Сначала муж, теперь это... Иногда мне кажется, что судьба преследует мою семью.",
+      "effects": [
+        {"type": "modify_relationship", "character": "char_lady_isabella", "amount": 15}
+      ],
+      "choices": [
+        {
+          "text": "Преследует ли? Или кто-то конкретный охотится на вашу семью?",
+          "next_node": "hunted",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "trade_connection",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Да. Моя семья владеет торговой компанией уже три поколения. Маркус, Селина, Ричард - все работали на нас.",
+      "choices": [
+        {
+          "text": "Значит, если кто-то хотел навредить вашему бизнесу...",
+          "next_node": "business_target",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "what_goods",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Всё, что приносит прибыль. Специи с юга, меха с севера, шёлк с востока, вино с запада. Обычная торговля.",
+      "choices": [
+        {
+          "text": "[Если найден манифест] Обычная? У меня есть манифест Маркуса. Там 'особые товары'.",
+          "next_node": "confront_contraband",
+          "conditions": {"has_clue": "clue_contraband_manifest"}
+        },
+        {
+          "text": "Ничего необычного? Ничего, что могло бы привлечь нежелательное внимание?",
+          "next_node": "unusual_goods",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "isabella_part",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Формально - да. Я владелица компании после смерти мужа. Но делами занимался Маркус. Я лишь получала отчёты и прибыль.",
+      "choices": [
+        {
+          "text": "Значит, вы могли не знать всех деталей операций?",
+          "next_node": "didnt_know_details",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "knew_contraband_hint",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Я... Маркус был осторожен. Он не всегда делился со мной деталями. Говорил, что так безопаснее для меня.",
+      "effects": [
+        {"type": "set_flag", "flag": "isabella_claims_ignorance", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Безопаснее от кого?",
+          "next_node": "safe_from_whom",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "press_books",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Хорошо! Да, некоторые книги... не одобрены Церковью. Но это не преступление! Это знания! История! Они не вредят никому!",
+      "effects": [
+        {"type": "set_flag", "flag": "isabella_admits_books", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Церковь так не считает. Они называют это ересью.",
+          "next_node": "church_heresy",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "back_off_books",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Не стоит извинений. Давайте лучше вернёмся к делу.",
+      "effects": [
+        {"type": "modify_relationship", "character": "char_lady_isabella", "amount": 10}
+      ],
+      "choices": [
+        {
+          "text": "У вас есть идеи, кто мог убить Маркуса и других?",
+          "next_node": "who_killed",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "enemies_question",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Враги? В торговле всегда есть конкуренты. Но убийство? Это... слишком радикально даже для наших соперников.",
+      "choices": [
+        {
+          "text": "А что насчёт Церкви?",
+          "next_node": "church_question",
+          "conditions": null
+        },
+        {
+          "text": "Может быть, кто-то из ваших деловых партнёров?",
+          "next_node": "partners_question",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "hunted",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Я... я боюсь об этом думать. Но да. Сначала муж умирает при 'странных обстоятельствах'. Теперь Маркус, Селина, Ричард. Все связанные с нашим делом.",
+      "effects": [
+        {"type": "set_flag", "flag": "isabella_fears_hunted", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Вы могли бы быть следующей. Кто охотится на вашу семью?",
+          "next_node": "who_hunts",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "business_target",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "shocked",
+      "text": "Боже... я не подумала об этом. Убивая их, кто-то уничтожает мой бизнес. Без Маркуса, Селины и Ричарда компания парализована.",
+      "effects": [
+        {"type": "set_flag", "flag": "realize_business_attack", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Кому это выгодно?",
+          "next_node": "who_benefits",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "confront_contraband",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "shocked",
+      "text": "Вы... нашли манифест? 'Особые товары' - это... это были редкости. Антиквариат. Книги. Ничего незаконного!",
+      "effects": [
+        {"type": "modify_relationship", "character": "char_lady_isabella", "amount": -20}
+      ],
+      "choices": [
+        {
+          "text": "Запрещённые Церковью книги. Языческие артефакты. Это контрабанда.",
+          "next_node": "contraband_accusation",
+          "conditions": null
+        },
+        {
+          "text": "Я не сужу. Но кто-то мог счесть это достаточной причиной для убийства.",
+          "next_node": "understanding_contraband",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "unusual_goods",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Необычного? Ну... Маркус иногда привозил редкости. Древности, книги, артефакты. Коллекционеры платят за них хорошо.",
+      "choices": [
+        {
+          "text": "Какого рода артефакты?",
+          "next_node": "artifact_details",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "didnt_know_details",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "sad",
+      "text": "Да. Маркус был... осторожен. Некоторые сделки он проводил без моего ведома. 'Для моей же защиты', говорил он.",
+      "choices": [
+        {
+          "text": "Защиты от чего?",
+          "next_node": "protection_from_what",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "safe_from_whom",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Он не говорил прямо. Но я слышала, как он однажды говорил Селине... 'Если Церковь узнает, мы все мертвы'.",
+      "effects": [
+        {"type": "set_flag", "flag": "isabella_heard_church_threat", "value": true},
+        {"type": "discover_clue", "clue_id": "clue_church_connection"}
+      ],
+      "choices": [
+        {
+          "text": "Церковь? Что Церковь могла узнать?",
+          "next_node": "church_discover",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "church_heresy",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "angry",
+      "text": "Церковь! Всегда Церковь! Они сжигают знания, которые не соответствуют их догмам! Тысячелетняя мудрость превращается в пепел потому что какой-то кардинал решил, что она 'опасна'!",
+      "effects": [
+        {"type": "set_flag", "flag": "isabella_hates_church", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Вы думаете, Церковь причастна к убийствам?",
+          "next_node": "church_responsible",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "who_killed",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "sad",
+      "text": "Я... не знаю. Город полон слухов. Одни говорят - пираты. Другие - конкуренты. Но я слышала... шёпот о Церкви.",
+      "choices": [
+        {
+          "text": "О Церкви? Расскажите подробнее.",
+          "next_node": "church_whispers",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "church_question",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Церковь... Вы спрашиваете об этом неспроста. Вы тоже слышали слухи?",
+      "choices": [
+        {
+          "text": "Какие слухи вы имеете в виду?",
+          "next_node": "church_rumors",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "partners_question",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Наши партнёры? Нет, мы работали с ними годами. Доверие - основа торговли. Предательство было бы... нерациональным.",
+      "choices": [
+        {
+          "text": "Тогда кто?",
+          "next_node": "then_who",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "who_hunts",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Я не знаю! Если бы знала, я бы уже сбежала отсюда! Но... есть шёпот. Люди говорят о монахах в чёрных плащах. О 'Очистителях'.",
+      "effects": [
+        {"type": "set_flag", "flag": "isabella_knows_purifiers", "value": true},
+        {"type": "discover_clue", "clue_id": "clue_purifiers_rumor"}
+      ],
+      "choices": [
+        {
+          "text": "'Очистители'? Что это?",
+          "next_node": "purifiers_question",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "who_benefits",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Конкурентам? Но они бы просто скупили мой бизнес. Церкви? Они... они давно смотрят на нас косо из-за наших товаров.",
+      "effects": [
+        {"type": "set_flag", "flag": "church_suspect", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Расскажите о проблемах с Церковью.",
+          "next_node": "church_problems",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "contraband_accusation",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "angry",
+      "text": "Контрабанда?! Это ЗНАНИЯ! История! Церковь не имеет права диктовать, что люди могут читать! Мы не преступники - мы просветители!",
+      "effects": [
+        {"type": "modify_relationship", "character": "char_lady_isabella", "amount": -30},
+        {"type": "set_flag", "flag": "isabella_defiant", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "И за это просвещение вас убивают.",
+          "next_node": "killed_for_books",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "understanding_contraband",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "sad",
+      "text": "Вы... понимаете. Да, кто-то мог. Церковь. Они ненавидят всё, что не вписывается в их учение. И у них есть... методы.",
+      "effects": [
+        {"type": "modify_relationship", "character": "char_lady_isabella", "amount": 20},
+        {"type": "set_flag", "flag": "isabella_trusts_player", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Какие методы?",
+          "next_node": "church_methods",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "artifact_details",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Древние статуэтки, манускрипты, реликвии... Вещи, которые Церковь считает 'языческими'. Но они просто старые. Исторические.",
+      "choices": [
+        {
+          "text": "И Церковь знала об этой торговле?",
+          "next_node": "church_knew",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "protection_from_what",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "От... последствий. Некоторые наши товары были... спорными. Церковь не одобряла. Маркус боялся инквизиции.",
+      "effects": [
+        {"type": "set_flag", "flag": "feared_inquisition", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Инквизиция? В Нептаре есть инквизиторы?",
+          "next_node": "inquisition_question",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "church_discover",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "sad",
+      "text": "О книгах. Об артефактах. О том, что мы привозим 'еретические' тексты и продаём коллекционерам. Маркус говорил, что это опасно.",
+      "choices": [
+        {
+          "text": "И Церковь узнала?",
+          "next_node": "church_found_out",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "church_responsible",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Я... боюсь так думать. Но да. Они единственные, у кого есть мотив и... фанатизм для таких действий.",
+      "effects": [
+        {"type": "set_flag", "flag": "isabella_accuses_church", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "У вас есть доказательства?",
+          "next_node": "evidence_question",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "church_whispers",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Говорят, что Церковь создала тайную группу. 'Очистители'. Они устраняют тех, кого считают угрозой вере. Тихо. Эффективно.",
+      "effects": [
+        {"type": "set_flag", "flag": "heard_purifiers", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Это серьёзное обвинение.",
+          "next_node": "serious_accusation",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "church_rumors",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "О монахах-убийцах. О тайных казнях еретиков. Маркус был параноиком на этот счёт. И теперь... он мёртв.",
+      "choices": [
+        {
+          "text": "Вы думаете, его убили из-за контрабанды запрещённых книг?",
+          "next_node": "killed_for_books",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "then_who",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Я... не хочу об этом говорить вслух. Но если вы действительно расследуете, посмотрите на Церковь. На брата Теодора.",
+      "effects": [
+        {"type": "set_flag", "flag": "isabella_names_theodore", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Брат Теодор? Кто это?",
+          "next_node": "theodore_info",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "purifiers_question",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Тайная организация внутри Церкви. Фанатики, которые убивают во имя 'чистоты веры'. Маркус был уверен, что они следят за нами.",
+      "choices": [
+        {
+          "text": "И теперь он мёртв. Вы можете быть следующей.",
+          "next_node": "you_next",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "church_problems",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "sad",
+      "text": "Два года назад кардинал вызвал Маркуса на допрос. Обвинил в распространении еретической литературы. Маркус откупился, но... угрозы не прекращались.",
+      "effects": [
+        {"type": "set_flag", "flag": "cardinal_threatened_marcus", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Какой кардинал?",
+          "next_node": "which_cardinal",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "killed_for_books",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "sad",
+      "text": "Возможно. Церковь убивала за меньшее. Инквизиция сжигала людей за владение одной запрещённой книгой. А у Маркуса их были десятки.",
+      "choices": [
+        {
+          "text": "Помогите мне их остановить. Дайте мне всё, что вы знаете.",
+          "next_node": "help_stop_them",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "church_methods",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "'Очистители'. Тайная группа фанатиков. Они убивают тех, кого Церковь считает еретиками. Тихо, без суда, без следов.",
+      "effects": [
+        {"type": "set_flag", "flag": "know_purifiers_from_isabella", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Где я могу найти информацию о них?",
+          "next_node": "find_purifiers",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "church_knew",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Подозревала. Брат Теодор Праведный... он следил за Маркусом. Задавал вопросы. Появлялся в порту слишком часто.",
+      "effects": [
+        {"type": "set_flag", "flag": "theodore_stalked_marcus", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Расскажите мне больше об этом брате Теодоре.",
+          "next_node": "theodore_info",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "inquisition_question",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Официально - нет. Но брат Теодор... он действует как инквизитор. Фанатик. Опасный человек.",
+      "choices": [
+        {
+          "text": "Где я могу найти этого брата Теодора?",
+          "next_node": "find_theodore",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "church_found_out",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "sad",
+      "text": "Я думаю, да. Маркус был напуган последние несколько недель. Говорил, что за ним следят. Что 'они придут'. И они пришли.",
+      "choices": [
+        {
+          "text": "Кто такие 'они'?",
+          "next_node": "who_are_they",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "evidence_question",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "sad",
+      "text": "Доказательства? У меня есть только страх и подозрения. Но... есть один человек. Послушник по имени Алекс. Он был... слишком заинтересован в наших делах.",
+      "effects": [
+        {"type": "set_flag", "flag": "isabella_mentions_alex", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Алекс? Расскажите о нём.",
+          "next_node": "alex_info",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "serious_accusation",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Я знаю. И я рискую, говоря это. Но если вы хотите найти убийц, ищите среди монахов. Ищите брата Теодора.",
+      "effects": [
+        {"type": "set_flag", "flag": "isabella_accuses_theodore", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Я найду его.",
+          "next_node": "ending_determined",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "theodore_info",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Инквизитор Церкви Вечного Света. Фанатик. Он читает проповеди о 'чистоте веры' и 'искоренении ереси'. Маркус боялся его больше всех.",
+      "effects": [
+        {"type": "set_flag", "flag": "know_theodore_inquisitor", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Где я могу найти брата Теодора?",
+          "next_node": "find_theodore",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "you_next",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Я... знаю. Я уже наняла охрану. Не выхожу из дома после заката. Но если они действительно хотят меня убить... охранники не помогут.",
+      "choices": [
+        {
+          "text": "Помогите мне их остановить. Пока не поздно.",
+          "next_node": "help_stop_them",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "which_cardinal",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Кардинал Малахий. Тот самый, который сейчас в столице. Влиятельный, могущественный, безжалостный.",
+      "effects": [
+        {"type": "set_flag", "flag": "cardinal_malachi_involved", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Значит, это идёт с самого верха.",
+          "next_node": "top_level",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "help_stop_them",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Что вам нужно? Я дам вам всё, что есть. Документы, свидетельства, всё. Только остановите их. Прежде чем они убьют ещё кого-то.",
+      "effects": [
+        {"type": "modify_relationship", "character": "char_lady_isabella", "amount": 40},
+        {"type": "set_flag", "flag": "isabella_full_cooperation", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Покажите мне всё, что у вас есть на Церковь.",
+          "next_node": "ending_evidence",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "find_purifiers",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Начните с брата Теодора. Он их лидер в Нептаре. У него есть ученики. Один из них - молодой послушник по имени Алекс. Странный мальчик.",
+      "effects": [
+        {"type": "set_flag", "flag": "know_theodore_leader", "value": true},
+        {"type": "set_flag", "flag": "know_alex_disciple", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Благодарю. Это очень помогает.",
+          "next_node": "ending_grateful",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "find_theodore",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "В соборе или в порту. Он часто появляется у доков. 'Проповедует морякам', как он говорит. Но я знаю - он выслеживает добычу.",
+      "effects": [
+        {"type": "set_flag", "flag": "theodore_location_hint", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Я найду его.",
+          "next_node": "ending_determined",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "who_are_they",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "fearful",
+      "text": "Церковь. Очистители. Брат Теодор и его фанатики. Они охотятся на еретиков. А мы, торговцы запрещёнными книгами, - идеальная мишень.",
+      "choices": [
+        {
+          "text": "Я остановлю их.",
+          "next_node": "ending_determined",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "alex_info",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Молодой послушник, лет двадцать. Ученик брата Теодора. Нервный, замкнутый. Я видела его у дома Маркуса за день до убийства. Он что-то высматривал.",
+      "effects": [
+        {"type": "set_flag", "flag": "alex_suspicious", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Мне нужно найти этого Алекса.",
+          "next_node": "ending_hunt_alex",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "top_level",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "sad",
+      "text": "Да. Это не просто безумие местного фанатика. Это организованная операция. И остановить её будет... очень сложно.",
+      "choices": [
+        {
+          "text": "Но я попытаюсь.",
+          "next_node": "ending_determined",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "ending_evidence",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Идёмте. У меня есть письма от Маркуса, манифесты, даже несколько записей о встречах с братом Теодором. Берите всё. И будьте осторожны.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_isabella_complete", "value": true},
+        {"type": "set_flag", "flag": "got_evidence_from_isabella", "value": true},
+        {"type": "unlock_location", "location": "loc_light_cathedral"}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "ending_grateful",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Будьте осторожны, детектив. Брат Теодор опасен. А если вы правы насчёт Очистителей... они не остановятся ни перед чем.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_isabella_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "ending_determined",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Удачи вам. И пожалуйста... остановите их. Прежде чем придут за мной.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_isabella_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "ending_hunt_alex",
+      "speaker_id": "char_lady_isabella",
+      "emotion": "neutral",
+      "text": "Попробуйте собор или доки. Послушники Теодора часто проповедуют морякам. Алекс выглядит молодо, тёмные волосы, нервные глаза. Узнаете его.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_isabella_complete", "value": true},
+        {"type": "set_flag", "flag": "hunt_for_alex", "value": true}
+      ],
+      "next_node": null
+    }
+  ]
+}

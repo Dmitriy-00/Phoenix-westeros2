@@ -1,0 +1,114 @@
+{
+  "factions": [
+    {
+      "id": "fact_house_stormhold",
+      "name": "Дом Стормхолд",
+      "type": "noble_house",
+      "description": "Старейший и наиболее уважаемый дом Севера. Контролирует холодные земли и известен своей честью и военной мощью.",
+      "base_reputation": 0,
+      "current_reputation": 0,
+      "relations": {
+        "fact_crown": -20,
+        "fact_eternal_light": 10,
+        "fact_house_goldcrest": -30,
+        "fact_scholars_circle": 25,
+        "fact_merchants_guild": 5
+      },
+      "controlled_locations": ["loc_stormhold_keep", "loc_north_village"]
+    },
+    {
+      "id": "fact_house_goldcrest",
+      "name": "Дом Золотой Гребень",
+      "type": "noble_house",
+      "description": "Богатый южный дом, тесно связанный с королевской семьёй. Известен своими интригами и жаждой власти.",
+      "base_reputation": -15,
+      "current_reputation": -15,
+      "relations": {
+        "fact_crown": 40,
+        "fact_house_stormhold": -30,
+        "fact_eternal_light": -10,
+        "fact_merchants_guild": 30,
+        "fact_scholars_circle": -5
+      },
+      "controlled_locations": ["loc_capital_city"]
+    },
+    {
+      "id": "fact_crown",
+      "name": "Королевская Корона",
+      "type": "royal_power",
+      "description": "Центральная власть королевства, ослабленная десятилетиями внутренних конфликтов и зависимая от великих домов.",
+      "base_reputation": 0,
+      "current_reputation": 0,
+      "relations": {
+        "fact_house_goldcrest": 40,
+        "fact_house_stormhold": -20,
+        "fact_eternal_light": 20,
+        "fact_merchants_guild": 15
+      },
+      "controlled_locations": ["loc_capital_city"]
+    },
+    {
+      "id": "fact_eternal_light",
+      "name": "Церковь Вечного Света",
+      "type": "religious_order",
+      "description": "Могущественный религиозный орден, влияющий на жизнь простого народа и знати. Стремится к духовной и политической власти.",
+      "base_reputation": 5,
+      "current_reputation": 5,
+      "relations": {
+        "fact_crown": 20,
+        "fact_house_stormhold": 10,
+        "fact_house_goldcrest": -10,
+        "fact_scholars_circle": -25,
+        "fact_merchants_guild": -15
+      },
+      "controlled_locations": ["loc_light_cathedral", "loc_holy_monastery"]
+    },
+    {
+      "id": "fact_scholars_circle",
+      "name": "Круг Учёных",
+      "type": "academic_order",
+      "description": "Орден мейстеров, учёных и исследователей. Формально нейтральны, но их знания делают их ценными союзниками.",
+      "base_reputation": 10,
+      "current_reputation": 10,
+      "relations": {
+        "fact_house_stormhold": 25,
+        "fact_eternal_light": -25,
+        "fact_crown": 5,
+        "fact_merchants_guild": 10
+      },
+      "controlled_locations": ["loc_grand_library"]
+    },
+    {
+      "id": "fact_merchants_guild",
+      "name": "Гильдия Восточных Торговцев",
+      "type": "merchant_guild",
+      "description": "Могущественная торговая организация, контролирующая морские пути и финансы королевства.",
+      "base_reputation": 0,
+      "current_reputation": 0,
+      "relations": {
+        "fact_house_goldcrest": 30,
+        "fact_house_stormhold": 5,
+        "fact_crown": 15,
+        "fact_eternal_light": -15,
+        "fact_scholars_circle": 10
+      },
+      "controlled_locations": ["loc_port_city", "loc_trade_hub"]
+    },
+    {
+      "id": "fact_city_guard",
+      "name": "Городская Стража Нептары",
+      "type": "law_enforcement",
+      "description": "Местные стражники, поддерживающие порядок в портовом городе. Подчиняются Короне, но также зависят от финансирования Торговой Гильдии. Честны, но часто перегружены работой.",
+      "base_reputation": 0,
+      "current_reputation": 0,
+      "relations": {
+        "fact_crown": 30,
+        "fact_merchants_guild": 20,
+        "fact_eternal_light": 10,
+        "fact_house_stormhold": 5,
+        "fact_scholars_circle": 0
+      },
+      "controlled_locations": ["loc_port_city"]
+    }
+  ]
+}

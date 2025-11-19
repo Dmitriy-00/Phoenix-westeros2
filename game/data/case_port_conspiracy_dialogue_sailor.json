@@ -1,0 +1,749 @@
+{
+  "dialogue_id": "dialogue_drunk_sailor",
+  "title": "Допрос пьяного моряка",
+  "description": "В таверне 'Солёная Русалка' вы находите старого моряка, который был в порту в ночь первого убийства. Он пьян, но возможно видел что-то важное.",
+  "location_id": "loc_salty_mermaid",
+  "participants": ["player", "npc_drunk_sailor"],
+  "conditions": {
+    "required_flags": ["investigation_started"],
+    "location_unlocked": "loc_salty_mermaid"
+  },
+  "start_node": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "speaker_id": "narrator",
+      "emotion": "neutral",
+      "text": "Таверна 'Солёная Русалка' полна дыма, шума и запаха дешёвого эля. В углу вы замечаете старого моряка, качающегося на стуле. Бармен кивает в его сторону: 'Старик Ракус. Он был на доках в ту ночь. Но он всегда пьян, так что...'",
+      "choices": [
+        {
+          "text": "[Подойти] Привет, старина. Можно присесть?",
+          "next_node": "friendly_approach",
+          "conditions": null
+        },
+        {
+          "text": "[Купить выпивку] Эй, приятель! Следующая кружка за мой счёт!",
+          "next_node": "buy_drinks",
+          "conditions": null
+        },
+        {
+          "text": "[Официально] Я детектив, расследую убийства. Мне нужно задать вам вопросы.",
+          "next_node": "official_approach",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "friendly_approach",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "neutral",
+      "text": "*икает* Присе-е-едай, незнакомец! Всегда рад компании! Меня зовут Ракус. Пятьдесят лет в море! *стучит кружкой по столу* Правда, последние десять - больше здесь, чем в море...",
+      "choices": [
+        {
+          "text": "Впечатляющий стаж! Расскажешь морскую историю?",
+          "next_node": "sea_story",
+          "conditions": null
+        },
+        {
+          "text": "Слышал, ты был на доках в ночь убийства Маркуса Волнореза?",
+          "next_node": "direct_question",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "buy_drinks",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "happy",
+      "text": "*глаза загораются* Бесплатное пиво?! Ты мой новый лучший друг! Ракус - моё имя! Садись, садись! *хлопает по скамье*",
+      "effects": [
+        {"type": "modify_relationship", "character": "npc_drunk_sailor", "amount": 30}
+      ],
+      "choices": [
+        {
+          "text": "*Заказываете две кружки* Так, Ракус, расскажи - что нового в порту?",
+          "next_node": "port_news",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "official_approach",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "*испуганно* Де-де-тектив?! Я ничего не сделал! Та драка в прошлом месяце - не моя вина! Он первый начал!",
+      "effects": [
+        {"type": "modify_relationship", "character": "npc_drunk_sailor", "amount": -20}
+      ],
+      "choices": [
+        {
+          "text": "Успокойся, я не из-за драки. Мне нужна информация об убийствах.",
+          "next_node": "calm_down",
+          "conditions": null
+        },
+        {
+          "text": "Сотрудничай, и у тебя не будет проблем.",
+          "next_node": "intimidate",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "sea_story",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "happy",
+      "text": "*оживляется* О! Была одна история! Шёл 812 год, мы плыли мимо Проклятых островов... *начинает длинную бессвязную историю про кракенов и сирен*",
+      "choices": [
+        {
+          "text": "*Слушаете терпеливо, ждёте паузу* Интересно! А что насчёт недавних событий в порту?",
+          "next_node": "recent_events",
+          "conditions": null
+        },
+        {
+          "text": "*Перебиваете* Извини, старина, но мне нужно спросить о важном деле.",
+          "next_node": "interrupt_story",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "direct_question",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "*трезвеет немного* Убийства? Ты копаешься в опасных делах, незнакомец. Лучше не знать.",
+      "choices": [
+        {
+          "text": "Почему опасных? Что ты видел?",
+          "next_node": "what_saw",
+          "conditions": null
+        },
+        {
+          "text": "Я заплачу за информацию. *достаёте монеты*",
+          "next_node": "bribe",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "port_news",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "sad",
+      "text": "*мрачнеет* Новости? Плохие новости. Три убийства за неделю. Богатые торговцы. Все зарезаны. Стража бегает как курицы, ничего не находит.",
+      "choices": [
+        {
+          "text": "Ты был на доках в ту ночь, когда убили первого - Маркуса?",
+          "next_node": "marcus_night",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "calm_down",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "neutral",
+      "text": "*немного успокаивается* Убийства... да, ужасное дело. Весь порт напуган. Богачи нанимают охрану, простые люди боятся выходить ночью.",
+      "effects": [
+        {"type": "modify_relationship", "character": "npc_drunk_sailor", "amount": 10}
+      ],
+      "choices": [
+        {
+          "text": "Говорят, ты был на доках в ночь первого убийства.",
+          "next_node": "marcus_night",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "intimidate",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "*дрожит* Я... я скажу что знаю! Только не сажайте меня!",
+      "effects": [
+        {"type": "modify_relationship", "character": "npc_drunk_sailor", "amount": -30}
+      ],
+      "choices": [
+        {
+          "text": "Говори. Что ты видел в ночь убийства Маркуса?",
+          "next_node": "intimidated_testimony",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "recent_events",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "sad",
+      "text": "*становится серьёзнее* Недавние события... Ты про убийства, да? Страшные дела. Я видел много смертей в море, но это... это другое.",
+      "choices": [
+        {
+          "text": "Другое? Что ты имеешь в виду?",
+          "next_node": "different_deaths",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "interrupt_story",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "angry",
+      "text": "*обижается* Эх, молодёжь! Никто не ценит хорошие истории! Ну ладно, о чём ты хотел спросить?",
+      "effects": [
+        {"type": "modify_relationship", "character": "npc_drunk_sailor", "amount": -10}
+      ],
+      "choices": [
+        {
+          "text": "Об убийствах. Ты был на доках в ту ночь?",
+          "next_node": "marcus_night",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "what_saw",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "*оглядывается* Я... *понижает голос* Я видел... тень. Человек в чёрном плаще. Монах, или кто-то, притворяющийся монахом.",
+      "effects": [
+        {"type": "set_flag", "flag": "sailor_saw_monk", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Монах? В чёрном плаще? Расскажи подробнее!",
+          "next_node": "monk_details",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "bribe",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "happy",
+      "text": "*глаза блестят* Платить? Ну... я могу вспомнить некоторые детали. За... скажем, десять серебряных?",
+      "choices": [
+        {
+          "text": "[Заплатить 10 серебра] Держи. Теперь говори.",
+          "next_node": "paid_testimony",
+          "conditions": {"has_money": 10}
+        },
+        {
+          "text": "[Торговаться] Пять серебра. Это всё, что у меня есть.",
+          "next_node": "haggle",
+          "conditions": null
+        },
+        {
+          "text": "У меня нет таких денег. Но я могу купить тебе выпивку.",
+          "next_node": "drinks_instead",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "marcus_night",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "*нервно* Да... я был. Не мог уснуть, вышел подышать. Видел... странные вещи.",
+      "choices": [
+        {
+          "text": "Какие странные вещи?",
+          "next_node": "strange_things",
+          "conditions": null
+        },
+        {
+          "text": "Ты видел убийцу?",
+          "next_node": "saw_killer",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "intimidated_testimony",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "*быстро говорит* Я видел человека в чёрном! Плащ с капюшоном! Выходил из дома Маркуса! Я видел кровь на его руках! Клянусь!",
+      "effects": [
+        {"type": "set_flag", "flag": "sailor_testimony_unreliable", "value": true},
+        {"type": "set_flag", "flag": "saw_black_figure", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Успокойся. Опиши этого человека.",
+          "next_node": "describe_figure",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "different_deaths",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "В море люди умирают от бури, от болезни, от несчастных случаев. Это понятно. Но эти убийства... холодные. Целенаправленные. Ритуальные почти.",
+      "choices": [
+        {
+          "text": "Ритуальные? Что заставляет тебя так думать?",
+          "next_node": "ritual_deaths",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "monk_details",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "*шепчет* Я был пьян, да. Но не настолько! Я видел его ясно. Чёрный плащ, символ Вечного Света на груди. Он выходил из дома Маркуса. Руки... руки были в крови.",
+      "effects": [
+        {"type": "discover_clue", "clue_id": "clue_drunk_sailor_testimony"},
+        {"type": "set_flag", "flag": "monk_had_blood", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Ты уверен, что это был символ Церкви?",
+          "next_node": "church_symbol",
+          "conditions": null
+        },
+        {
+          "text": "Видел ли ты его лицо?",
+          "next_node": "saw_face",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "paid_testimony",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "happy",
+      "text": "*прячет монеты* Отлично! Слушай внимательно. В ту ночь, около полуночи, я видел монаха. Чёрный плащ, символ Церкви. Выходил из дома Маркуса. Торопился.",
+      "effects": [
+        {"type": "discover_clue", "clue_id": "clue_drunk_sailor_testimony"},
+        {"type": "modify_relationship", "character": "npc_drunk_sailor", "amount": 20}
+      ],
+      "choices": [
+        {
+          "text": "Опиши его внешность.",
+          "next_node": "describe_monk",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "haggle",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "thoughtful",
+      "text": "*думает* Хм... пять серебра... Ладно, договорились! Я не жадный человек.",
+      "effects": [
+        {"type": "modify_relationship", "character": "npc_drunk_sailor", "amount": 10}
+      ],
+      "choices": [
+        {
+          "text": "[Заплатить] Держи. Говори.",
+          "next_node": "paid_testimony",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "drinks_instead",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "happy",
+      "text": "*смеётся* Эх, выпивка - тоже хорошая валюта! Ладно, я расскажу. *машет бармену*",
+      "effects": [
+        {"type": "modify_relationship", "character": "npc_drunk_sailor", "amount": 15}
+      ],
+      "choices": [
+        {
+          "text": "*Ждёте, пока он выпьет* Так что ты видел?",
+          "next_node": "after_drink",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "strange_things",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "Тень возле дома Маркуса. Человек в плаще. Крался как вор, но двигался как... воин. Опасно.",
+      "choices": [
+        {
+          "text": "Это мог быть монах?",
+          "next_node": "could_be_monk",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "saw_killer",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "*пьёт залпом* Может быть. Я видел кого-то. Не знаю, был ли это убийца. Но... человек в чёрном выходил из дома Маркуса той ночью.",
+      "choices": [
+        {
+          "text": "Расскажи всё, что помнишь.",
+          "next_node": "everything_remember",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "describe_figure",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "Высокий... или средний? Чёрный плащ точно! Капюшон закрывал лицо! Двигался быстро! Я спрятался, боялся, что заметит меня!",
+      "choices": [
+        {
+          "text": "Был ли на плаще символ Церкви?",
+          "next_node": "church_symbol_question",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "ritual_deaths",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "Все убиты одинаково. Одним ударом. Церковный кинжал, говорят. Три жертвы, все торговцы, все связаны. Это не случайно. Это... план.",
+      "choices": [
+        {
+          "text": "Откуда ты знаешь про церковный кинжал?",
+          "next_node": "how_know_dagger",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "church_symbol",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "Да! Я видел его! Золотое солнце на чёрной ткани! Символ Вечного Света! Я не ошибся!",
+      "effects": [
+        {"type": "set_flag", "flag": "definitely_church", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Ты рассказал об этом страже?",
+          "next_node": "told_guards",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "saw_face",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "sad",
+      "text": "Нет... капюшон был глубокий. Но я видел... молодые руки. Не старик. Может быть, двадцать-тридцать лет.",
+      "effects": [
+        {"type": "set_flag", "flag": "killer_young", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Молодой монах... Это важная деталь.",
+          "next_node": "important_detail",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "describe_monk",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "thoughtful",
+      "text": "Молодой, я думаю. Двигался быстро. Не старик точно. Чёрный плащ с капюшоном. Символ Церкви на груди. Руки... кровь на руках.",
+      "choices": [
+        {
+          "text": "Ты рассказал об этом кому-нибудь?",
+          "next_node": "told_anyone",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "after_drink",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "neutral",
+      "text": "*икает* Ааах! Хорошее пиво! Так, где я... а, да! Монах! Я видел монаха той ночью! Выходил из дома Маркуса!",
+      "effects": [
+        {"type": "discover_clue", "clue_id": "clue_drunk_sailor_testimony"}
+      ],
+      "choices": [
+        {
+          "text": "Опиши его подробнее.",
+          "next_node": "describe_monk",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "could_be_monk",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "Да... плащ был похож на монашеский. Чёрный, длинный. И я мог поклясться, что видел символ Церкви.",
+      "effects": [
+        {"type": "set_flag", "flag": "suspect_church_member", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Ты уверен в этом?",
+          "next_node": "are_you_sure",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "everything_remember",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "thoughtful",
+      "text": "*напрягается вспомнить* Было около полуночи. Я шёл от таверны. Увидел тень у дома Маркуса. Чёрный плащ, символ Церкви. Человек спешил, оглядывался. Руки... были тёмные. Кровь, наверное.",
+      "effects": [
+        {"type": "discover_clue", "clue_id": "clue_drunk_sailor_testimony"},
+        {"type": "set_flag", "flag": "detailed_testimony", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Это очень важно. Благодарю тебя.",
+          "next_node": "ending_grateful",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "church_symbol_question",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "thoughtful",
+      "text": "Символ... я думаю, да! Золотое солнце! Точно! Церковь Вечного Света!",
+      "effects": [
+        {"type": "set_flag", "flag": "church_symbol_seen", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Значит, это был церковный служитель.",
+          "next_node": "church_servant",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "how_know_dagger",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "neutral",
+      "text": "Слухи. Моряки в таверне говорят. Кто-то из стражи проболтался. Орудие убийства - церемониальный кинжал.",
+      "choices": [
+        {
+          "text": "Понятно. А ты сам что-нибудь видел той ночью?",
+          "next_node": "what_you_saw",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "told_guards",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "Нет! Ты с ума сошёл?! Обвинять Церковь?! Меня сожгут как еретика! Или хуже - я просто исчезну, как те торговцы!",
+      "choices": [
+        {
+          "text": "Я защищу тебя. Твои показания важны.",
+          "next_node": "protect_you",
+          "conditions": null
+        },
+        {
+          "text": "Понимаю твой страх. Не волнуйся, я никому не скажу, откуда у меня информация.",
+          "next_node": "keep_secret",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "important_detail",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "neutral",
+      "text": "Помогает? Хорошо. Только будь осторожен. Если Церковь действительно за этим стоит... они опасны.",
+      "choices": [
+        {
+          "text": "Я буду осторожен. Спасибо за помощь.",
+          "next_node": "ending_thanks",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "told_anyone",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "Кому? Страже? Они бы не поверили пьяному моряку! Или хуже - доложили бы Церкви! Нет, я молчал. До тебя.",
+      "choices": [
+        {
+          "text": "Ты правильно сделал, что рассказал мне.",
+          "next_node": "right_choice",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "are_you_sure",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "thoughtful",
+      "text": "Уверен? Я был пьян... но не настолько! Я знаю, что видел! Монах Церкви Вечного Света выходил из дома в ночь убийства!",
+      "effects": [
+        {"type": "discover_clue", "clue_id": "clue_drunk_sailor_testimony"}
+      ],
+      "choices": [
+        {
+          "text": "Хорошо. Я верю тебе.",
+          "next_node": "believe_you",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "church_servant",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "Да. Монах, послушник, может быть даже инквизитор. Кто-то из Церкви. Точно.",
+      "choices": [
+        {
+          "text": "Это серьёзное обвинение. Благодарю за информацию.",
+          "next_node": "ending_serious",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "what_you_saw",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "Я... я видел монаха. Выходил из дома Маркуса. Спешил. Оглядывался. Виноватый вид.",
+      "choices": [
+        {
+          "text": "Расскажи подробности.",
+          "next_node": "tell_details",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "protect_you",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "Защитишь? Ты? От Церкви?! *истерически смеётся* Никто не может защитить от них! Но... если ты действительно хочешь остановить убийц... используй мою информацию. Только не называй меня.",
+      "effects": [
+        {"type": "set_flag", "flag": "sailor_anonymous", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Договорились. Твоё имя не прозвучит.",
+          "next_node": "ending_anonymous",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "keep_secret",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "neutral",
+      "text": "Благодарю. Я не герой. Просто старый моряк, который хочет дожить до следующего утра.",
+      "effects": [
+        {"type": "modify_relationship", "character": "npc_drunk_sailor", "amount": 25}
+      ],
+      "choices": [
+        {
+          "text": "Твоя информация поможет. Спасибо.",
+          "next_node": "ending_grateful",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "right_choice",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "neutral",
+      "text": "Надеюсь. Останови их. Убийства должны прекратиться.",
+      "choices": [
+        {
+          "text": "Я сделаю всё возможное.",
+          "next_node": "ending_determined",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "believe_you",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "neutral",
+      "text": "Хорошо. Не многие верят словам пьяниц. Спасибо за это.",
+      "effects": [
+        {"type": "modify_relationship", "character": "npc_drunk_sailor", "amount": 20}
+      ],
+      "choices": [
+        {
+          "text": "Твоя информация ценна. Береги себя.",
+          "next_node": "ending_grateful",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "tell_details",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "thoughtful",
+      "text": "Молодой, быстрый. Чёрный плащ. Символ Церкви. Руки в крови. Убежал в сторону доков. Это всё, что я помню.",
+      "effects": [
+        {"type": "discover_clue", "clue_id": "clue_drunk_sailor_testimony"},
+        {"type": "set_flag", "flag": "full_testimony", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Этого достаточно. Благодарю.",
+          "next_node": "ending_grateful",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "ending_grateful",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "neutral",
+      "text": "Удачи тебе, детектив. И будь осторожен. Церковь не прощает тех, кто копается в их делах.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_sailor_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "ending_thanks",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "neutral",
+      "text": "Пожалуйста. Только останови их. Прежде чем убьют ещё кого-то.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_sailor_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "ending_serious",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "fearful",
+      "text": "Серьёзное, да. И опасное. Береги себя, детектив.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_sailor_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "ending_anonymous",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "neutral",
+      "text": "Хорошо. Теперь, если не возражаешь, мне нужна ещё одна кружка. Чтобы забыть эту беседу.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_sailor_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "ending_determined",
+      "speaker_id": "npc_drunk_sailor",
+      "emotion": "neutral",
+      "text": "Верю тебе. Удачи.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_sailor_complete", "value": true}
+      ],
+      "next_node": null
+    }
+  ]
+}

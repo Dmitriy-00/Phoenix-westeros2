@@ -1,0 +1,75 @@
+{
+  "id": "interrogation_maester",
+  "name": "Допрос мейстера Корвина",
+  "character_id": "char_maester_tower",
+  "max_mistakes": 3,
+  "statements": [
+    {
+      "id": "stmt_1",
+      "text": "Я служу дому Стормхолд тридцать лет. Моя преданность не может быть под вопросом!",
+      "emotion": "angry",
+      "correct_evidence": [],
+      "press_response": "Да, я понимаю вашу преданность, мейстер. Но факты - это факты. Продолжим?",
+      "evidence_response": {}
+    },
+    {
+      "id": "stmt_2",
+      "text": "В ту ночь я был в своей башне, работал над хрониками до самого рассвета.",
+      "emotion": "neutral",
+      "correct_evidence": ["clue_witness_night_guard"],
+      "press_response": "Работали до рассвета? В одиночестве? Может ли кто-то подтвердить это?",
+      "evidence_response": {
+        "clue_witness_night_guard": "Стражник видел вас, выходящего из башни гостей около полуночи! Как вы это объясните?!"
+      }
+    },
+    {
+      "id": "stmt_3",
+      "text": "Я нашёл посла мёртвым утром и сразу сообщил лорду Эйдену. Я пытался помочь!",
+      "emotion": "sad",
+      "correct_evidence": [],
+      "press_response": "Вы первый увидели тело? При каких обстоятельствах вы вошли в его покои?",
+      "evidence_response": {}
+    },
+    {
+      "id": "stmt_4",
+      "text": "Яд, который убил посла - это редкое южное вещество. У меня нет доступа к таким вещам!",
+      "emotion": "fearful",
+      "correct_evidence": ["clue_poisoned_wine", "clue_gold_coins"],
+      "press_response": "Редкое южное вещество... Как вы узнали, что это именно южный яд? Вы же не специалист по ядам... или специалист?",
+      "evidence_response": {
+        "clue_poisoned_wine": "Этот яд действительно редкий и дорогой. Его могли купить только за большие деньги!",
+        "clue_gold_coins": "А эти золотые монеты дома Золотой Гребень, найденные в вашей башне? Это и есть те самые 'большие деньги', не так ли?!"
+      }
+    },
+    {
+      "id": "stmt_5",
+      "text": "Х-хорошо! Да, мне заплатили. Но я не убивал! Я только... передал письмо послу в ту ночь.",
+      "emotion": "fearful",
+      "correct_evidence": ["clue_bloody_letter"],
+      "press_response": "Только передали письмо? И что было в этом письме, мейстер Корвин?",
+      "evidence_response": {
+        "clue_bloody_letter": "Вот это письмо! Испачканное кровью! Вы передали ему письмо с угрозами, а потом убили его!"
+      }
+    },
+    {
+      "id": "stmt_6",
+      "text": "Нет! Письмо было от... от кого-то из столицы. Я не знал, что в нём! Мне просто заплатили за доставку!",
+      "emotion": "shocked",
+      "correct_evidence": [],
+      "press_response": "От кого именно из столицы? Назовите имя!",
+      "evidence_response": {}
+    }
+  ],
+  "success_effects": [
+    {"type": "set_case_flag", "flag": "maester_confession", "value": true},
+    {"type": "set_case_flag", "flag": "accomplice_identified", "value": true},
+    {"type": "discover_clue", "clue_id": "clue_church_blessing"},
+    {"type": "modify_relationship", "character": "char_maester_tower", "amount": -40},
+    {"type": "advance_case"}
+  ],
+  "failure_effects": [
+    {"type": "set_case_flag", "flag": "maester_escaped_justice", "value": true}
+  ],
+  "current_mistakes": 0,
+  "completed": false
+}

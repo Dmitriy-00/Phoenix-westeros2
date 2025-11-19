@@ -1,0 +1,280 @@
+{
+  "cases": [
+    {
+      "id": "case_north_murder_01",
+      "title": "Тень над Стормхолдом",
+      "short_description": "Убийство высокопоставленного гостя в крепости Стормхолд грозит разжечь войну между Севером и Югом. Вы должны найти убийцу, прежде чем кровь прольётся реками.",
+      "difficulty": 2,
+      "starting_location_id": "loc_stormhold_keep",
+      "allowed_locations": [
+        "loc_stormhold_keep",
+        "loc_north_village",
+        "loc_capital_city",
+        "loc_light_cathedral",
+        "loc_grand_library"
+      ],
+      "key_characters": [
+        "char_lord_north",
+        "char_heir_north",
+        "char_maester_tower",
+        "char_cardinal_south"
+      ],
+      "required_clues_to_solve": [
+        "clue_bloody_letter",
+        "clue_poisoned_wine",
+        "clue_gold_coins"
+      ],
+      "endings": [
+        {
+          "id": "ending_true_justice",
+          "name": "Истинное Правосудие",
+          "conditions": {
+            "correct_accusation": true,
+            "faction_balance_ok": true
+          },
+          "description": "Истинный убийца разоблачён - мейстер Корвин действовал по приказу южных интриганов. Доказательства неопровержимы, но политическая цена высока. Отношения с домом Золотой Гребень испорчены, но честь Севера восстановлена.",
+          "effects": [
+            {"type": "modify_reputation", "faction": "fact_house_stormhold", "amount": 30},
+            {"type": "modify_reputation", "faction": "fact_house_goldcrest", "amount": -40},
+            {"type": "modify_relationship", "character": "char_lord_north", "amount": 25},
+            {"type": "set_flag", "flag": "case_01_solved_correctly", "value": true}
+          ]
+        },
+        {
+          "id": "ending_scapegoat",
+          "name": "Козёл Отпущения",
+          "conditions": {
+            "wrong_accusation": true
+          },
+          "description": "Невиновный человек казнён, чтобы удовлетворить жажду мести. Истинный заговор остаётся нераскрытым, и тени продолжают собираться над королевством.",
+          "effects": [
+            {"type": "modify_reputation", "faction": "fact_house_stormhold", "amount": -20},
+            {"type": "modify_relationship", "character": "char_lord_north", "amount": -30},
+            {"type": "set_flag", "flag": "case_01_innocent_executed", "value": true}
+          ]
+        },
+        {
+          "id": "ending_political_compromise",
+          "name": "Политический Компромисс",
+          "conditions": {
+            "accusation_hidden": true
+          },
+          "description": "Истина известна, но преданна забвению ради политической стабильности. Убийца уходит безнаказанным, но война предотвращена. Какой ценой?",
+          "effects": [
+            {"type": "modify_reputation", "faction": "fact_house_stormhold", "amount": -10},
+            {"type": "modify_reputation", "faction": "fact_house_goldcrest", "amount": 10},
+            {"type": "modify_reputation", "faction": "fact_crown", "amount": 15},
+            {"type": "modify_relationship", "character": "char_lord_north", "amount": -20},
+            {"type": "set_flag", "flag": "case_01_compromise", "value": true}
+          ]
+        },
+        {
+          "id": "ending_church_intervention",
+          "name": "Вмешательство Церкви",
+          "conditions": {
+            "church_accused": true
+          },
+          "description": "Вы обвиняете Церковь Вечного Света в организации убийства. Кардинал Малахий отрицает всё, но его влияние пошатнулось. Впрочем, теперь у вас появился могущественный враг.",
+          "effects": [
+            {"type": "modify_reputation", "faction": "fact_eternal_light", "amount": -50},
+            {"type": "modify_reputation", "faction": "fact_scholars_circle", "amount": 20},
+            {"type": "modify_relationship", "character": "char_cardinal_south", "amount": -60},
+            {"type": "set_flag", "flag": "case_01_church_enemy", "value": true}
+          ]
+        }
+      ],
+      "current_stage": 0,
+      "completed": false,
+      "discovered_clues": [],
+      "flags": {}
+    },
+    {
+      "id": "case_port_conspiracy",
+      "title": "Заговор в Нептаре",
+      "short_description": "Серия загадочных убийств богатых торговцев в портовом городе Нептара. Три жертвы, одно орудие убийства, никаких свидетелей. Торговая гильдия требует расследования, но тёмные силы не хотят, чтобы правда всплыла наружу.",
+      "difficulty": 3,
+      "starting_location_id": "loc_port_city",
+      "allowed_locations": [
+        "loc_port_city",
+        "loc_trade_hub",
+        "loc_capital_city",
+        "loc_light_cathedral",
+        "loc_grand_library"
+      ],
+      "key_characters": [
+        "char_merchant_prince",
+        "char_captain_ironhand",
+        "char_lady_isabella",
+        "char_brother_theodore",
+        "char_alex_swiftblade"
+      ],
+      "required_clues_to_solve": [
+        "clue_contraband_manifest",
+        "clue_church_dagger",
+        "clue_alex_confession"
+      ],
+      "optional_clues": [
+        "clue_drunk_sailor_testimony",
+        "clue_forbidden_book",
+        "clue_cardinal_letter",
+        "clue_selina_note",
+        "clue_pirate_blade"
+      ],
+      "stages": [
+        {
+          "stage_number": 1,
+          "name": "Прибытие в Нептару",
+          "description": "Встреча с капитаном стражи, первичный осмотр места преступления",
+          "objectives": [
+            "Поговорить с капитаном Железная Длань",
+            "Узнать о жертвах",
+            "Получить доступ к местам преступлений"
+          ]
+        },
+        {
+          "stage_number": 2,
+          "name": "Расследование",
+          "description": "Сбор улик, допрос свидетелей и подозреваемых",
+          "objectives": [
+            "Осмотреть дом Маркуса",
+            "Поговорить с леди Изабеллой",
+            "Найти пьяного моряка в таверне",
+            "Исследовать связь с Церковью"
+          ]
+        },
+        {
+          "stage_number": 3,
+          "name": "Очистители",
+          "description": "Обнаружение тайной организации внутри Церкви",
+          "objectives": [
+            "Найти Алекса 'Быстрый Клинок'",
+            "Провести допрос",
+            "Получить признание",
+            "Узнать о брате Теодоре"
+          ]
+        },
+        {
+          "stage_number": 4,
+          "name": "Заговор",
+          "description": "Раскрытие масштабов заговора",
+          "objectives": [
+            "Решить, как поступить с Алексом",
+            "Найти доказательства против брата Теодора",
+            "Определить причастность кардинала Малахия",
+            "Выбрать способ разрешения дела"
+          ]
+        }
+      ],
+      "endings": [
+        {
+          "id": "ending_true_justice",
+          "name": "Истинное Правосудие",
+          "conditions": {
+            "has_clues": ["clue_alex_confession", "clue_church_dagger", "clue_cardinal_letter"],
+            "alex_alive": true,
+            "public_trial": true
+          },
+          "description": "Вы разоблачаете весь заговор публично. Алекс свидетельствует против брата Теодора и предоставляет письмо кардинала. Суд приговаривает 'Очистителей' к казни. Церковь Вечного Света теряет влияние, Алекс получает помилование за сотрудничество. Справедливость восторжествовала, но вы нажили могущественного врага.",
+          "effects": [
+            {"type": "modify_reputation", "faction": "fact_merchants_guild", "amount": 40},
+            {"type": "modify_reputation", "faction": "fact_eternal_light", "amount": -60},
+            {"type": "modify_reputation", "faction": "fact_city_guard", "amount": 25},
+            {"type": "modify_relationship", "character": "char_merchant_prince", "amount": 30},
+            {"type": "modify_relationship", "character": "char_alex_swiftblade", "amount": 40},
+            {"type": "modify_relationship", "character": "char_cardinal_south", "amount": -80},
+            {"type": "set_flag", "flag": "case_port_true_justice", "value": true},
+            {"type": "set_flag", "flag": "church_weakened", "value": true},
+            {"type": "character_fate", "character": "char_brother_theodore", "fate": "executed"},
+            {"type": "character_fate", "character": "char_alex_swiftblade", "fate": "pardoned"}
+          ]
+        },
+        {
+          "id": "ending_church_attacked",
+          "name": "Церковь под ударом",
+          "conditions": {
+            "has_clues": ["clue_alex_confession", "clue_church_dagger"],
+            "missing_clues": ["clue_cardinal_letter"],
+            "public_trial": true
+          },
+          "description": "Вы разоблачаете 'Очистителей', но без письма кардинала не можете доказать причастность верхушки Церкви. Брат Теодор и Алекс казнены, Церковь объявляет их 'безумными фанатиками, действовавшими самостоятельно'. Кардинал Малахий выходит сухим из воды, но его тайная операция провалилась.",
+          "effects": [
+            {"type": "modify_reputation", "faction": "fact_merchants_guild", "amount": 30},
+            {"type": "modify_reputation", "faction": "fact_eternal_light", "amount": -30},
+            {"type": "modify_reputation", "faction": "fact_city_guard", "amount": 20},
+            {"type": "modify_relationship", "character": "char_merchant_prince", "amount": 20},
+            {"type": "modify_relationship", "character": "char_cardinal_south", "amount": -40},
+            {"type": "set_flag", "flag": "case_port_partial_justice", "value": true},
+            {"type": "character_fate", "character": "char_brother_theodore", "fate": "executed"},
+            {"type": "character_fate", "character": "char_alex_swiftblade", "fate": "executed"}
+          ]
+        },
+        {
+          "id": "ending_coverup",
+          "name": "Прикрыть Заговор",
+          "conditions": {
+            "has_clues": ["clue_alex_confession", "clue_cardinal_letter"],
+            "political_deal": true,
+            "church_influence_high": true
+          },
+          "description": "Вы знаете правду, но решаете договориться с Церковью. Кардинал Малахий соглашается отозвать 'Очистителей' и компенсировать семьи жертв в обмен на молчание. Брат Теодор тихо исчезает, Алекс отправлен в отдалённый монастырь. Убийства объявлены делом рук пиратов. Политическая стабильность сохранена, но справедливости нет.",
+          "effects": [
+            {"type": "modify_reputation", "faction": "fact_merchants_guild", "amount": 10},
+            {"type": "modify_reputation", "faction": "fact_eternal_light", "amount": 20},
+            {"type": "modify_reputation", "faction": "fact_crown", "amount": 25},
+            {"type": "modify_relationship", "character": "char_merchant_prince", "amount": -20},
+            {"type": "modify_relationship", "character": "char_cardinal_south", "amount": 30},
+            {"type": "modify_relationship", "character": "char_alex_swiftblade", "amount": -30},
+            {"type": "set_flag", "flag": "case_port_coverup", "value": true},
+            {"type": "set_flag", "flag": "moral_compromise", "value": true},
+            {"type": "character_fate", "character": "char_brother_theodore", "fate": "disappeared"},
+            {"type": "character_fate", "character": "char_alex_swiftblade", "fate": "exiled"}
+          ]
+        },
+        {
+          "id": "ending_scapegoat",
+          "name": "Козёл Отпущения",
+          "conditions": {
+            "wrong_accusation": true
+          },
+          "description": "Вы обвиняете пиратов или другого невиновного в убийствах. Князь Валериан доволен быстрым закрытием дела. Настоящие убийцы остаются на свободе. Торговцы успокоены, но справедливости не свершилось. 'Очистители' продолжают свою работу в тени.",
+          "effects": [
+            {"type": "modify_reputation", "faction": "fact_merchants_guild", "amount": 15},
+            {"type": "modify_reputation", "faction": "fact_eternal_light", "amount": 30},
+            {"type": "modify_reputation", "faction": "fact_city_guard", "amount": -10},
+            {"type": "modify_relationship", "character": "char_merchant_prince", "amount": 10},
+            {"type": "modify_relationship", "character": "char_captain_ironhand", "amount": -25},
+            {"type": "set_flag", "flag": "case_port_failed", "value": true},
+            {"type": "set_flag", "flag": "innocent_punished", "value": true},
+            {"type": "set_flag", "flag": "purifiers_active", "value": true}
+          ]
+        },
+        {
+          "id": "ending_secret_justice",
+          "name": "Тайное Правосудие",
+          "conditions": {
+            "has_clues": ["clue_alex_confession", "clue_church_dagger"],
+            "alex_helps": true,
+            "theodore_killed_secretly": true
+          },
+          "description": "Вы решаете действовать вне закона. Алекс помогает вам найти брата Теодора. Инквизитор погибает при 'несчастном случае'. Официально дело закрыто как работа пиратов, но убийства прекращаются. Алекс получает шанс на искупление. Вы знаете правду, но никто другой никогда её не узнает.",
+          "effects": [
+            {"type": "modify_reputation", "faction": "fact_merchants_guild", "amount": 20},
+            {"type": "modify_reputation", "faction": "fact_eternal_light", "amount": 0},
+            {"type": "modify_reputation", "faction": "fact_city_guard", "amount": 5},
+            {"type": "modify_relationship", "character": "char_alex_swiftblade", "amount": 50},
+            {"type": "modify_relationship", "character": "char_captain_ironhand", "amount": -10},
+            {"type": "set_flag", "flag": "case_port_secret_justice", "value": true},
+            {"type": "set_flag", "flag": "vigilante_justice", "value": true},
+            {"type": "set_flag", "flag": "alex_redeemed", "value": true},
+            {"type": "character_fate", "character": "char_brother_theodore", "fate": "killed_secretly"},
+            {"type": "character_fate", "character": "char_alex_swiftblade", "fate": "redeemed"}
+          ]
+        }
+      ],
+      "current_stage": 0,
+      "completed": false,
+      "discovered_clues": [],
+      "flags": {}
+    }
+  ]
+}

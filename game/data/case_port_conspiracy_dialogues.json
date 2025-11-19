@@ -1,0 +1,420 @@
+{
+  "dialogue_id": "case_port_conspiracy_intro",
+  "nodes": [
+    {
+      "id": "start",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "angry",
+      "text": "Три убийства за неделю! Три богатых торговца, зарезаны как свиньи! А городская стража беспомощна! Вот почему Гильдия потребовала расследователя из столицы.",
+      "choices": [
+        {
+          "text": "Расскажите мне о жертвах, капитан.",
+          "next_node": "victims_info",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "text": "Какие улики вы нашли?",
+          "next_node": "evidence_question",
+          "conditions": [],
+          "effects": [
+            {"type": "modify_relationship", "character": "char_captain_ironhand", "amount": 5}
+          ]
+        },
+        {
+          "text": "Почему вы не смогли найти убийцу сами?",
+          "next_node": "insult_captain",
+          "conditions": [],
+          "effects": [
+            {"type": "modify_relationship", "character": "char_captain_ironhand", "amount": -10}
+          ]
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "victims_info",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "sad",
+      "text": "Маркус Волнорез - торговец пряностями. Первым нашли, удар кинжалом в спину. Селина Морская Звезда - владелица складов, та же участь. Ричард Золотой Парус - капитан торгового флота, убит на собственном корабле.",
+      "choices": [
+        {
+          "text": "Что общего между жертвами?",
+          "next_node": "common_thread",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "text": "Были ли свидетели?",
+          "next_node": "witnesses_question",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "evidence_question",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "neutral",
+      "text": "Почти ничего. Все убийства ночью, кинжалом в спину. Никаких криков, никаких следов борьбы. Профессиональная работа.",
+      "choices": [
+        {
+          "text": "Вы подозреваете наёмного убийцу?",
+          "next_node": "assassin_theory",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "text": "Расскажите о жертвах.",
+          "next_node": "victims_info",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "insult_captain",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "angry",
+      "text": "Потому что нас десять человек на весь портовый город! Пока ловим пьяных драчунов и воров, кто-то режет самых богатых людей Нептары! У нас нет ресурсов для такого расследования!",
+      "choices": [
+        {
+          "text": "Простите, я не хотел обидеть. Расскажите, что знаете.",
+          "next_node": "victims_info",
+          "conditions": [],
+          "effects": [
+            {"type": "modify_relationship", "character": "char_captain_ironhand", "amount": 5}
+          ]
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "common_thread",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "thoughtful",
+      "text": "Все богатые торговцы. Все вели дела с Востоком. Но половина Нептары торгует с Востоком! Это ничего не даёт.",
+      "choices": [
+        {
+          "text": "Может, они торговали чем-то особенным?",
+          "next_node": "contraband_hint",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "text": "Кто-то мог мстить Гильдии?",
+          "next_node": "guild_revenge_theory",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "witnesses_question",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "neutral",
+      "text": "Один пьяный моряк бредил что-то о монахе в чёрном. Но он был настолько пьян, что не мог стоять. Не самый надёжный свидетель.",
+      "choices": [
+        {
+          "text": "Монах? Церковь замешана?",
+          "next_node": "church_suspicion",
+          "conditions": [],
+          "effects": [
+            {"type": "set_flag", "flag": "suspect_church", "value": true}
+          ]
+        },
+        {
+          "text": "Мне нужно поговорить с этим моряком.",
+          "next_node": "sailor_location",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "assassin_theory",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "neutral",
+      "text": "Возможно. Но кто заказал убийства? И зачем трое? Если это конкурент, то убил бы одного. Если грабёж, то забрал бы ценности. Ничего не украдено!",
+      "choices": [
+        {
+          "text": "Значит, мотив не деньги.",
+          "next_node": "motive_discussion",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "contraband_hint",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "neutral",
+      "text": "Возможно. Маркус торговал пряностями и... экзотическими товарами. Слухи ходили, что не всё законное. Но доказательств нет.",
+      "choices": [
+        {
+          "text": "Кто-то убирает контрабандистов?",
+          "next_node": "contraband_theory",
+          "conditions": [],
+          "effects": [
+            {"type": "set_flag", "flag": "contraband_theory", "value": true}
+          ]
+        },
+        {
+          "text": "Мне нужно осмотреть места преступлений.",
+          "next_node": "crime_scenes",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "guild_revenge_theory",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "neutral",
+      "text": "Князь Валериан настаивает на версии с пиратами. Мол, морские разбойники мстят за потопленные корабли. Но мне это не кажется правдоподобным.",
+      "choices": [
+        {
+          "text": "Почему не кажется правдоподобным?",
+          "next_node": "pirate_doubts",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "text": "А что думаете вы?",
+          "next_node": "captain_theory",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "church_suspicion",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "fearful",
+      "text": "Тише! Не говорите таких вещей вслух! Церковь Вечного Света... они могущественны. Я не хочу проблем с инквизицией.",
+      "choices": [
+        {
+          "text": "Значит, вы тоже подозреваете Церковь.",
+          "next_node": "captain_fears",
+          "conditions": [],
+          "effects": []
+        },
+        {
+          "text": "Ладно, забудем об этом. Что ещё?",
+          "next_node": "other_leads",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "sailor_location",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "neutral",
+      "text": "Он обитает в таверне 'Солёная Русалка' у доков. Если сможете добиться от него толку - удачи вам.",
+      "choices": [
+        {
+          "text": "Спасибо. Что ещё мне нужно знать?",
+          "next_node": "final_info",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {
+        "type": "set_flag",
+        "flag": "know_sailor_location",
+        "value": true
+      }
+    },
+    {
+      "id": "motive_discussion",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "thoughtful",
+      "text": "Верно. Это меня и беспокоит. Убийца знает, что делает, но мотив неясен. Может, месть? Может, что-то личное?",
+      "choices": [
+        {
+          "text": "Я узнаю. Дайте мне доступ к местам преступлений.",
+          "next_node": "crime_scenes",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "contraband_theory",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "shocked",
+      "text": "Убивает контрабандистов?! Но кто? Стража? Нет, мы не... Конкуренты? Но тогда почему Селина и Ричард? Они честные торговцы!",
+      "choices": [
+        {
+          "text": "Может, они знали о контрабанде Маркуса?",
+          "next_node": "witnesses_killed",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "crime_scenes",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "neutral",
+      "text": "Конечно. Дом Маркуса опечатан, склад Селины под охраной, корабль 'Золотой Парус' стоит в доках. Осматривайте, что хотите.",
+      "choices": [
+        {
+          "text": "Отлично. Начинаю расследование.",
+          "next_node": "end",
+          "conditions": [],
+          "effects": [
+            {"type": "set_flag", "flag": "investigation_started", "value": true},
+            {"type": "unlock_location", "location_id": "loc_port_city"}
+          ]
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "pirate_doubts",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "neutral",
+      "text": "Пираты режут в бою, а не крадутся по ночам с кинжалом. Это не их почерк. Но Валериан настаивает, и у него власть.",
+      "choices": [
+        {
+          "text": "Возможно, кто-то хочет свалить вину на пиратов?",
+          "next_node": "frame_pirates",
+          "conditions": [],
+          "effects": [
+            {"type": "set_flag", "flag": "pirate_frame", "value": true}
+          ]
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "captain_theory",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "thoughtful",
+      "text": "Я думаю, что это личное. Кто-то мстит этим конкретным людям. Но за что - не знаю. Надеюсь, вы выясните.",
+      "choices": [
+        {
+          "text": "Я сделаю всё возможное. Дайте доступ к местам преступлений.",
+          "next_node": "crime_scenes",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "captain_fears",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "fearful",
+      "text": "Я... ничего не говорил. Расследуйте, как считаете нужным. Но будьте осторожны. Церковь не прощает обвинений.",
+      "choices": [
+        {
+          "text": "Понял. Начинаю расследование.",
+          "next_node": "final_info",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "other_leads",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "neutral",
+      "text": "Есть вдова Маркуса - леди Изабелла. Она может знать что-то о делах мужа. И Князь Валериан хочет с вами встретиться.",
+      "choices": [
+        {
+          "text": "Спасибо. Я поговорю с ними.",
+          "next_node": "final_info",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "witnesses_killed",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "shocked",
+      "text": "Свидетелей убивают, чтобы скрыть преступление... Значит, это не просто убийство контрабандиста, это заметание следов! Будьте осторожны!",
+      "choices": [
+        {
+          "text": "Я буду. Начинаю расследование.",
+          "next_node": "crime_scenes",
+          "conditions": [],
+          "effects": []
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "frame_pirates",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "thoughtful",
+      "text": "Вы правы... Мы даже нашли пиратский клинок рядом с телом Ричарда. Но это было слишком удобно. Как будто кто-то хочет, чтобы мы обвинили пиратов.",
+      "choices": [
+        {
+          "text": "Сохраните этот клинок как улику. Мне нужно осмотреть места преступлений.",
+          "next_node": "crime_scenes",
+          "conditions": [],
+          "effects": [
+            {"type": "discover_clue", "clue_id": "clue_pirate_blade"}
+          ]
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    },
+    {
+      "id": "final_info",
+      "speaker_id": "char_captain_ironhand",
+      "emotion": "neutral",
+      "text": "Удачи вам. Найдите убийцу, пока не грянула паника. Торговцы уже боятся выходить на улицы ночью.",
+      "choices": [
+        {
+          "text": "Я найду виновного. Обещаю.",
+          "next_node": "end",
+          "conditions": [],
+          "effects": [
+            {"type": "set_flag", "flag": "investigation_started", "value": true},
+            {"type": "unlock_location", "location_id": "loc_port_city"},
+            {"type": "modify_relationship", "character": "char_captain_ironhand", "amount": 10}
+          ]
+        }
+      ],
+      "conditions": {},
+      "effects": {}
+    }
+  ]
+}

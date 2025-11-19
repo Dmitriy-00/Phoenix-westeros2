@@ -1,0 +1,1144 @@
+{
+  "dialogue_id": "dialogue_brother_theodore",
+  "title": "Встреча с Братом Теодором Праведным",
+  "description": "Вы находите брата Теодора в соборе. Он ждал вас. Эта встреча может стать последней.",
+  "location_id": "loc_light_cathedral",
+  "participants": ["player", "char_brother_theodore"],
+  "conditions": {
+    "required_flags": ["know_theodore_suspect"],
+    "optional_flags": ["have_evidence", "alex_confessed"]
+  },
+  "start_node": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "pious",
+      "text": "Детектив. Я ждал вас. Знал, что рано или поздно ваше расследование приведёт вас ко мне. Пожалуйста, присаживайтесь. Нам есть о чём поговорить.",
+      "choices": [
+        {
+          "text": "Вы знали, что я ищу вас? Почему не скрылись?",
+          "next_node": "why_not_hide",
+          "conditions": null
+        },
+        {
+          "text": "Брат Теодор. Я расследую убийства трёх торговцев. У меня есть вопросы.",
+          "next_node": "official_questions",
+          "conditions": null
+        },
+        {
+          "text": "Вы убили их. Маркуса, Селину, Ричарда. Признайтесь.",
+          "next_node": "direct_accusation",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "why_not_hide",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "pious",
+      "text": "Скрываться? От чего? От правосудия? Я служу высшему правосудию - воле Вечного Света. Земные законы ничто перед божественным велением.",
+      "choices": [
+        {
+          "text": "Божественное веление оправдывает убийство?",
+          "next_node": "divine_justification",
+          "conditions": null
+        },
+        {
+          "text": "Значит, вы признаёте свою причастность?",
+          "next_node": "admit_involvement",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "official_questions",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Конечно. Задавайте. Я не скрываю своих действий. Всё, что я делаю - во славу Вечного Света.",
+      "choices": [
+        {
+          "text": "Где вы были в ночь убийства Маркуса Волнореза?",
+          "next_node": "alibi_question",
+          "conditions": null
+        },
+        {
+          "text": "Вы знали жертв?",
+          "next_node": "knew_victims",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "direct_accusation",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "Прямолинейно. Мне это нравится. Да, я устранил еретиков, отравлявших души верующих. Это не убийство - это священная обязанность.",
+      "effects": [
+        {"type": "set_flag", "flag": "theodore_confessed", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Священная обязанность?! Это преднамеренное убийство!",
+          "next_node": "murder_debate",
+          "conditions": null
+        },
+        {
+          "text": "[Сдержанно] Расскажите, почему вы считали их еретиками.",
+          "next_node": "heretics_why",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "divine_justification",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "pious",
+      "text": "Когда тело поражено гангреной, вы отсекаете больную плоть, чтобы спасти остальное. Так и с обществом - иногда необходимо удалить заражённых ересью, чтобы спасти тысячи невинных душ.",
+      "choices": [
+        {
+          "text": "Вы не врач, а убийца. Это не лечение, а фанатизм.",
+          "next_node": "fanaticism_accusation",
+          "conditions": null
+        },
+        {
+          "text": "Кто дал вам право решать, кто 'болен'?",
+          "next_node": "who_gave_right",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "admit_involvement",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "Причастность? Я был исполнителем воли Церкви. Да, я устранил угрозу. И я горжусь этим.",
+      "effects": [
+        {"type": "set_flag", "flag": "theodore_admits", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Воли Церкви? У вас был приказ?",
+          "next_node": "church_order",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "alibi_question",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "Я был там, где мне следовало быть - исполнял священный долг. Маркус Волнорез был еретиком, торговцем запрещённых текстов. Его смерть - справедливое наказание.",
+      "effects": [
+        {"type": "set_flag", "flag": "theodore_no_alibi", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Вы только что признались в убийстве.",
+          "next_node": "confession_noted",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "knew_victims",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "Жертв? Они не жертвы! Они еретики! Маркус торговал запрещёнными книгами! Селина хранила языческие артефакты! Ричард перевозил эту мерзость! Они заслужили свою судьбу!",
+      "choices": [
+        {
+          "text": "Даже если это правда, убийство - не решение.",
+          "next_node": "murder_not_solution",
+          "conditions": null
+        },
+        {
+          "text": "Кто дал вам право их судить?",
+          "next_node": "who_gave_right",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "murder_debate",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "Убийство?! Это казнь! Суд Божий! Они отравляли умы людей языческой ложью! Сколько душ будут гореть в аду из-за их 'товаров'?!",
+      "choices": [
+        {
+          "text": "Земные законы не предусматривают смертную казнь за продажу книг.",
+          "next_node": "earthly_laws",
+          "conditions": null
+        },
+        {
+          "text": "А сколько душ теперь на вашей совести?",
+          "next_node": "souls_on_conscience",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "heretics_why",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "pious",
+      "text": "Они торговали запрещёнными знаниями. Языческие тексты, еретические трактаты, артефакты древних культов. Каждая проданная книга - ещё одна душа, отвращённая от истинной веры.",
+      "choices": [
+        {
+          "text": "Это всего лишь книги. Слова на бумаге.",
+          "next_node": "just_books",
+          "conditions": null
+        },
+        {
+          "text": "Разве вера так слаба, что не выдержит столкновения с другими идеями?",
+          "next_node": "weak_faith",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "fanaticism_accusation",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "Фанатизм?! Называйте это как хотите! Я защищаю веру! Я спасаю души! А вы - вы защищаете торговцев ересью! На чьей стороне настоящее зло?!",
+      "choices": [
+        {
+          "text": "Зло - это вы, убивающий безоружных людей.",
+          "next_node": "you_are_evil",
+          "conditions": null
+        },
+        {
+          "text": "Я на стороне закона. И закон говорит - убийство есть убийство.",
+          "next_node": "law_vs_faith",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "who_gave_right",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "pious",
+      "text": "Бог дал мне это право! Церковь возложила на меня эту обязанность! Я - меч Вечного Света, карающий нечестивых!",
+      "choices": [
+        {
+          "text": "Церковь? У вас есть официальный приказ?",
+          "next_node": "official_order",
+          "conditions": null
+        },
+        {
+          "text": "Вы безумец, прикрывающийся религией.",
+          "next_node": "madman_accusation",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "church_order",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "Приказ? *смеётся* Официальных приказов на такие дела не бывает, детектив. Но есть... понимание. Кивок кардинала. Одобрительное молчание. Церковь знает, что необходимо, и я исполняю.",
+      "effects": [
+        {"type": "set_flag", "flag": "church_tacit_approval", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Значит, кардинал Малахий знает о ваших действиях?",
+          "next_node": "cardinal_knows",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "confession_noted",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "И что вы сделаете с этим признанием? Арестуете меня? Церковь объявит вас гонителем веры. Народ восстанет. У вас нет власти надо мной.",
+      "choices": [
+        {
+          "text": "У меня есть власть закона.",
+          "next_node": "power_of_law",
+          "conditions": null
+        },
+        {
+          "text": "Церковь не защитит вас от обвинения в тройном убийстве.",
+          "next_node": "triple_murder",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "murder_not_solution",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "Не решение? А что является решением? Суд? Тюрьма? Они бы откупились! Богатые всегда уходят от наказания! Только Божий суд неподкупен!",
+      "choices": [
+        {
+          "text": "Вы не Бог. Вы просто человек, совершивший убийство.",
+          "next_node": "just_human",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "earthly_laws",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "Земные законы созданы грешными людьми. Божественный закон превыше их. И Божественный закон гласит: еретик должен умереть.",
+      "choices": [
+        {
+          "text": "Мы живём в обществе людей, не богов. Здесь действуют человеческие законы.",
+          "next_node": "human_society",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "souls_on_conscience",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "pious",
+      "text": "На моей совести? Ни одной! Еретики не имеют души! Они - пустые сосуды, наполненные злом! Я освободил мир от скверны!",
+      "choices": [
+        {
+          "text": "Вы действительно верите в эту чушь?",
+          "next_node": "believe_nonsense",
+          "conditions": null
+        },
+        {
+          "text": "Селина была матерью двоих детей. Ричард - отцом четверых. У них были семьи.",
+          "next_node": "had_families",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "just_books",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "ВСЕГО ЛИШЬ книги?! Идеи опаснее мечей! Одна еретическая мысль может погубить тысячи! Эти 'слова на бумаге' отравляли умы, сеяли сомнение, разрушали веру!",
+      "choices": [
+        {
+          "text": "Вера, которую можно разрушить книгой, не заслуживает существования.",
+          "next_node": "faith_worthy",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "weak_faith",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "*взрывается гневом* СЛАБАЯ?! Истинная вера не должна подвергаться испытанию ложью! Овцы должны быть защищены от волков! Простые люди не способны распознать яд ереси!",
+      "choices": [
+        {
+          "text": "Значит, вы считаете людей глупцами, не способными мыслить самостоятельно?",
+          "next_node": "people_fools",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "you_are_evil",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "*встаёт, сжимает кулаки* Я - зло? Я посвятил жизнь служению Свету! Я отказался от мирских благ! Я спасаю души! А вы смеете называть меня злом?!",
+      "choices": [
+        {
+          "text": "[Стоять твёрдо] Да. Вы убийца, и вы ответите за свои преступления.",
+          "next_node": "stand_firm",
+          "conditions": null
+        },
+        {
+          "text": "[Отступить] Я просто констатирую факты.",
+          "next_node": "back_down",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "law_vs_faith",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "Закон... Ваш закон защищает еретиков. Ваш закон позволяет душам гореть в аду. Ваш закон - инструмент тьмы. Я служу высшей справедливости.",
+      "choices": [
+        {
+          "text": "Ваша 'высшая справедливость' - это анархия и самосуд.",
+          "next_node": "anarchy",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "official_order",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Официальный приказ? Нет. Но есть... понимание. Кардинал Малахий знает о проблеме ереси в Нептаре. Он дал... разрешение действовать по своему усмотрению.",
+      "effects": [
+        {"type": "set_flag", "flag": "cardinal_gave_permission", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "У вас есть доказательства этого разрешения?",
+          "next_node": "proof_of_permission",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "madman_accusation",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "Безумец?! Безумие - это позволять ереси распространяться! Безумие - это защищать торговцев проклятием! Я единственный здравомыслящий в этом городе грешников!",
+      "choices": [
+        {
+          "text": "Все фанатики считают себя единственными здравомыслящими.",
+          "next_node": "all_fanatics",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "cardinal_knows",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "Знает. Одобряет. Не публично, конечно. Но Церковь понимает необходимость... решительных действий против ереси.",
+      "effects": [
+        {"type": "set_flag", "flag": "cardinal_involved_confirmed", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Значит, это заговор на уровне высшего духовенства.",
+          "next_node": "conspiracy",
+          "conditions": null
+        },
+        {
+          "text": "У вас есть письма от кардинала? Доказательства?",
+          "next_node": "letters_proof",
+          "conditions": {"has_clue": "clue_cardinal_letter"}
+        }
+      ]
+    },
+    {
+      "id": "power_of_law",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "Власть закона? *смеётся* Половина судей - прихожане моей церкви. Городская стража получает пожертвования от Церкви. У вас нет власти.",
+      "choices": [
+        {
+          "text": "У меня есть доказательства. И я найду суд, который вас осудит.",
+          "next_node": "have_evidence",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "triple_murder",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Защитит. Церковь защищала инквизиторов столетиями. Народ верит нам. А вам? Кто вы? Чужак, копающийся в делах города.",
+      "choices": [
+        {
+          "text": "Я - тот, кто остановит вас.",
+          "next_node": "will_stop_you",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "just_human",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "pious",
+      "text": "Я - инструмент Божий. Меч в Его руке. Я исполняю волю, превосходящую моё понимание.",
+      "choices": [
+        {
+          "text": "Удобная позиция - снять с себя ответственность.",
+          "next_node": "convenient_position",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "human_society",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "И это ваша проблема! Общество, отвергнувшее Бога, обречено! Я пытаюсь спасти его, но такие как вы мешают!",
+      "choices": [
+        {
+          "text": "Убийством нельзя спасти общество.",
+          "next_node": "cant_save_by_killing",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "believe_nonsense",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "Чушь?! Это священная истина! Еретики - враги человечества! Они хуже чумы!",
+      "choices": [
+        {
+          "text": "Нет. Вы - враг человечества. Убийца, фанатик.",
+          "next_node": "you_enemy",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "had_families",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "*на мгновение колеблется* Семьи... Да, это... прискорбно. Но лучше дети останутся сиротами, чем вырастут еретиками. Я спас их души.",
+      "effects": [
+        {"type": "set_flag", "flag": "theodore_moment_doubt", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Вы слышите себя? Это безумие!",
+          "next_node": "hear_yourself",
+          "conditions": null
+        },
+        {
+          "text": "[Использовать сомнение] Вы знаете, что это неправильно. Я вижу это в ваших глазах.",
+          "next_node": "use_doubt",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "faith_worthy",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "*гневно бьёт кулаком по столу* Еретическая мысль! Вера - абсолютна! Она не нуждается в доказательствах или испытаниях!",
+      "choices": [
+        {
+          "text": "Слепая вера - это невежество, а не добродетель.",
+          "next_node": "blind_faith",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "people_fools",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Не глупцами. Но... неопытными. Слабыми. Нуждающимися в руководстве. Пастырь ведёт овец не потому, что они глупы, а потому что они беззащитны.",
+      "choices": [
+        {
+          "text": "Люди - не овцы. Они имеют право думать самостоятельно.",
+          "next_node": "not_sheep",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "stand_firm",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "*достаёт кинжал* Тогда вы - такой же враг веры, как и они. И вас ждёт та же судьба. Очистительный огонь!",
+      "effects": [
+        {"type": "set_flag", "flag": "theodore_threatens", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "[Готовиться к бою] Попробуйте.",
+          "next_node": "combat_threat",
+          "conditions": null
+        },
+        {
+          "text": "[Попытаться успокоить] Подождите! Нет нужды в насилии!",
+          "next_node": "calm_threat",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "back_down",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "*успокаивается* Факты... Да. Факты просты. Я служу Свету. Еретики мертвы. Мир стал чище.",
+      "choices": [
+        {
+          "text": "И что теперь? Вы продолжите убивать?",
+          "next_node": "continue_killing",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "anarchy",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "Называйте как хотите. Я называю это спасением. История меня оправдает.",
+      "choices": [
+        {
+          "text": "История помнит фанатиков как монстров.",
+          "next_node": "history_monsters",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "proof_of_permission",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "*усмехается* Доказательства? Такие вещи не записываются, детектив. Но если вы настаиваете... *достаёт письмо* Это письмо кардинала. Читайте.",
+      "effects": [
+        {"type": "discover_clue", "clue_id": "clue_cardinal_letter"},
+        {"type": "set_flag", "flag": "theodore_gave_letter", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "[Читать письмо] Это... это прямой приказ на убийство.",
+          "next_node": "read_letter",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "all_fanatics",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "Фанатик! Снова это слово! Я не фанатик - я верующий! Я преданный! Я праведный!",
+      "choices": [
+        {
+          "text": "Праведные не убивают безоружных.",
+          "next_node": "righteous_dont_kill",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "conspiracy",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "Заговор? Нет. Необходимость. Церковь делает то, что должна, чтобы защитить веру. Если это требует... деликатных методов... так тому и быть.",
+      "choices": [
+        {
+          "text": "Я разоблачу это. Весь мир узнает правду.",
+          "next_node": "expose_truth",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "letters_proof",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "shocked",
+      "text": "*бледнеет* Как... как вы получили это?! Это было в моей личной... Неважно. Да, есть письма. И что с того? Кто поверит вам против кардинала?",
+      "choices": [
+        {
+          "text": "Правда имеет свою силу.",
+          "next_node": "truth_has_power",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "have_evidence",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Доказательства... Они ничего не изменят. Но... попробуйте. Интересно будет посмотреть.",
+      "choices": [
+        {
+          "text": "Я остановлю вас. Обещаю.",
+          "next_node": "promise_stop",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "will_stop_you",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "Попытайтесь. Многие пытались остановить Церковь. Все провалились. Вы будете следующим.",
+      "effects": [
+        {"type": "set_flag", "flag": "theodore_challenges", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Увидим.",
+          "next_node": "ending_challenge",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "convenient_position",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "Ответственность?! Я принимаю полную ответственность! Перед Богом! Не перед вами!",
+      "choices": [
+        {
+          "text": "Вы ответите перед земным судом.",
+          "next_node": "earthly_court",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "cant_save_by_killing",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Можно. История полна примеров. Иногда жертва необходима для спасения многих.",
+      "choices": [
+        {
+          "text": "Это не спасение. Это тирания.",
+          "next_node": "tyranny",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "you_enemy",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "Тогда мы враги. И в этой войне может быть только один победитель.",
+      "choices": [
+        {
+          "text": "Это не война. Это правосудие против преступления.",
+          "next_node": "justice_vs_crime",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "hear_yourself",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "Я слышу истину! Вы просто слишком слабы, чтобы принять её!",
+      "choices": [
+        {
+          "text": "Нет. Вы слепы от фанатизма.",
+          "next_node": "blind_fanaticism",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "use_doubt",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "fearful",
+      "text": "*отводит взгляд* Неправильно... Нет. Это было... необходимо. *голос дрожит* Я делал то, что должен был. Я... я не мог позволить им...",
+      "effects": [
+        {"type": "set_flag", "flag": "theodore_doubts", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "[Мягко] Не поздно остановиться. Признайтесь. Раскайтесь.",
+          "next_node": "persuade_repent",
+          "conditions": null
+        },
+        {
+          "text": "Вы знаете, что это было убийство. Чистое и простое.",
+          "next_node": "was_murder",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "blind_faith",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "pious",
+      "text": "Слепая вера - единственная истинная вера. Сомнение - это яд дьявола.",
+      "choices": [
+        {
+          "text": "Тогда мы не найдём общего языка.",
+          "next_node": "no_common_ground",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "not_sheep",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "И их 'самостоятельное мышление' ведёт их в ад! Я не позволю этому!",
+      "choices": [
+        {
+          "text": "Это их выбор, не ваш.",
+          "next_node": "their_choice",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "combat_threat",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "*колеблется* Нет... не здесь. Не в священном соборе. Но знайте - наши пути пересекутся снова. И тогда... один из нас не выживет.",
+      "effects": [
+        {"type": "set_flag", "flag": "theodore_threat_made", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Буду готов.",
+          "next_node": "ending_combat_threat",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "calm_threat",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "*убирает кинжал* Нет... вы правы. Не здесь. Это святое место. Уходите. Пока я ещё позволяю.",
+      "choices": [
+        {
+          "text": "Это не конец, Теодор.",
+          "next_node": "ending_threat_calmed",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "continue_killing",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Если будет необходимо. Ересь не спит. Я тоже не могу спать.",
+      "choices": [
+        {
+          "text": "Тогда я остановлю вас. Любой ценой.",
+          "next_node": "ending_determined",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "history_monsters",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "История пишется победителями. А победит вера. Всегда побеждает.",
+      "choices": [
+        {
+          "text": "Не на этот раз.",
+          "next_node": "ending_defiant",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "read_letter",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "Прямой? Нет. Завуалированный. 'Очистите город от ереси'. Я лишь исполнил приказ по своему разумению.",
+      "choices": [
+        {
+          "text": "Это всё равно приказ на убийство. И я его использую.",
+          "next_node": "will_use_letter",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "righteous_dont_kill",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "Праведные делают то, что необходимо! Даже если это трудно! Даже если это страшно!",
+      "choices": [
+        {
+          "text": "Нет. Вы просто убийца.",
+          "next_node": "just_killer",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "expose_truth",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "Попытайтесь. Но помните - Церковь существует тысячу лет. Мы пережили королей, войны, эпидемии. Мы переживём и вас.",
+      "choices": [
+        {
+          "text": "Посмотрим.",
+          "next_node": "ending_challenge",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "truth_has_power",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Возможно. Но власть имеет большую силу. И власть - на моей стороне.",
+      "choices": [
+        {
+          "text": "Не вечно.",
+          "next_node": "ending_defiant",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "promise_stop",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Обещания легко давать. Сложнее выполнять. Удачи вам, детектив. Вам понадобится.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_theodore_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "earthly_court",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "Суд? Половина судей - верующие. Они поймут. Они одобрят.",
+      "choices": [
+        {
+          "text": "Мы увидим.",
+          "next_node": "ending_challenge",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "tyranny",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Тирания... спасение... Слова. Важны лишь результаты.",
+      "choices": [
+        {
+          "text": "А результат - трое мёртвых невинных.",
+          "next_node": "three_dead",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "justice_vs_crime",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "Тогда пусть ваше 'правосудие' попытается одолеть мою веру. Посмотрим, что сильнее.",
+      "choices": [
+        {
+          "text": "Я принимаю вызов.",
+          "next_node": "ending_challenge",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "blind_fanaticism",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "pious",
+      "text": "Фанатизм - это преданность. Слепота - это ясность цели. Я горжусь этим.",
+      "choices": [
+        {
+          "text": "Тогда вам не помочь.",
+          "next_node": "ending_hopeless",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "persuade_repent",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "fearful",
+      "text": "*долгая пауза* Раскаяться... Нет. *голос крепчает* Нет! Я сделал правильно! Это было необходимо! Я не раскаюсь!",
+      "effects": [
+        {"type": "set_flag", "flag": "theodore_refuses_repent", "value": true}
+      ],
+      "choices": [
+        {
+          "text": "Тогда вас ждёт суд.",
+          "next_node": "ending_justice",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "was_murder",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "*тихо* Да. Убийство. Но... необходимое убийство. Иногда нужно выбирать меньшее зло.",
+      "choices": [
+        {
+          "text": "Нет такой вещи, как 'необходимое убийство'.",
+          "next_node": "no_necessary_murder",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "no_common_ground",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Нет. Не найдём. Идите. Делайте то, что должны. Я сделаю то, что должен я.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_theodore_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "their_choice",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "Их выбор - ошибочный! И я исправлю его!",
+      "choices": [
+        {
+          "text": "Убийством невозможно исправить ничего.",
+          "next_node": "cant_fix_by_killing",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "will_use_letter",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "shocked",
+      "text": "*осознаёт ошибку* Нет! Отдайте! *тянется к письму*",
+      "choices": [
+        {
+          "text": "[Уклониться] Это доказательство. Спасибо, что облегчили мою работу.",
+          "next_node": "ending_evidence_secured",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "just_killer",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "angry",
+      "text": "А вы - просто помеха. Уходите, пока я не передумал быть милосердным.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_theodore_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "three_dead",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Не невинных. Еретиков. Важная разница.",
+      "choices": [
+        {
+          "text": "Для вас, может быть. Не для закона.",
+          "next_node": "ending_law",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "cant_fix_by_killing",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "История доказывает обратное. Но спорить бесполезно. Идите.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_theodore_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "no_necessary_murder",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "sad",
+      "text": "*устало* Может быть, вы правы. Может быть, я проклят. Но дело сделано. Пути назад нет.",
+      "choices": [
+        {
+          "text": "Всегда есть путь к искуплению.",
+          "next_node": "redemption_path",
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "id": "redemption_path",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "sad",
+      "text": "*качает головой* Слишком поздно. Слишком много крови. Делайте, что должны, детектив.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_theodore_complete", "value": true},
+        {"type": "set_flag", "flag": "theodore_resigned", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "ending_challenge",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "smug",
+      "text": "Увидим. До встречи, детектив.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_theodore_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "ending_defiant",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Ваша уверенность похвальна. Но бесполезна. Прощайте.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_theodore_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "ending_determined",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Попытайтесь. Многие пытались остановить волю Божию. Все провалились.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_theodore_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "ending_combat_threat",
+      "speaker_id": "narrator",
+      "emotion": "neutral",
+      "text": "Брат Теодор смотрит вам вслед, сжимая кинжал. Эта война только начинается.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_theodore_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "ending_threat_calmed",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Нет. Это только начало.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_theodore_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "ending_hopeless",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "pious",
+      "text": "Помощь мне не нужна. Я уже спасён. Вопрос в вас.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_theodore_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "ending_justice",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Суд... Посмотрим, чей суд победит - ваш или Божий.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_theodore_complete", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "ending_evidence_secured",
+      "speaker_id": "narrator",
+      "emotion": "neutral",
+      "text": "Вы быстро прячете письмо. Теодор смотрит на вас с яростью и... страхом. Вы получили неопровержимое доказательство заговора.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_theodore_complete", "value": true},
+        {"type": "set_flag", "flag": "secured_cardinal_letter", "value": true}
+      ],
+      "next_node": null
+    },
+    {
+      "id": "ending_law",
+      "speaker_id": "char_brother_theodore",
+      "emotion": "neutral",
+      "text": "Закон... Мы увидим, насколько силён ваш закон против веры народа.",
+      "effects": [
+        {"type": "set_flag", "flag": "dialogue_theodore_complete", "value": true}
+      ],
+      "next_node": null
+    }
+  ]
+}
