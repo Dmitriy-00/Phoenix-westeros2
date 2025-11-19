@@ -76,6 +76,94 @@
       "related_locations": ["loc_light_cathedral"],
       "tags": ["церковь", "заговор", "религия"],
       "discovered": false
+    },
+    {
+      "id": "clue_contraband_manifest",
+      "name": "Контрабандный манифест",
+      "type": "document",
+      "description": "Тайный список запрещённых товаров, ввезённых Маркусом Волнорезом: еретические книги, языческие артефакты, древние тексты. Причина его смерти.",
+      "reliability": 90,
+      "related_characters": ["char_lady_isabella", "char_merchant_prince"],
+      "related_locations": ["loc_port_city"],
+      "tags": ["контрабанда", "мотив", "еретики"],
+      "discovered": false
+    },
+    {
+      "id": "clue_church_dagger",
+      "name": "Церковный кинжал",
+      "type": "weapon",
+      "description": "Кинжал с символом Церкви Вечного Света, использованный в убийствах. Ясное доказательство причастности религиозного ордена.",
+      "reliability": 95,
+      "related_characters": ["char_brother_theodore", "char_alex_swiftblade"],
+      "related_locations": ["loc_port_city"],
+      "tags": ["орудие убийства", "церковь", "доказательство"],
+      "discovered": false
+    },
+    {
+      "id": "clue_drunk_sailor_testimony",
+      "name": "Показания пьяного моряка",
+      "type": "testimony",
+      "description": "Пьяный моряк видел монаха в чёрном плаще у дома Маркуса в ночь убийства. Надёжность под вопросом из-за состояния свидетеля.",
+      "reliability": 60,
+      "related_characters": ["char_brother_theodore"],
+      "related_locations": ["loc_port_city"],
+      "tags": ["свидетель", "ночь убийства", "монах"],
+      "discovered": false
+    },
+    {
+      "id": "clue_forbidden_book",
+      "name": "Запрещённая книга",
+      "type": "item",
+      "description": "Древняя книга по магии с Востока, противоречащая догматам Церкви. Один из контрабандных товаров Маркуса.",
+      "reliability": 85,
+      "related_characters": ["char_lady_isabella"],
+      "related_locations": ["loc_port_city"],
+      "tags": ["контрабанда", "ересь", "магия"],
+      "discovered": false
+    },
+    {
+      "id": "clue_cardinal_letter",
+      "name": "Письмо от Кардинала",
+      "type": "document",
+      "description": "Зашифрованное письмо от Кардинала Малахия с приказом 'очистить город от еретиков'. Прямое доказательство заговора на высшем уровне Церкви.",
+      "reliability": 100,
+      "related_characters": ["char_cardinal_south", "char_brother_theodore"],
+      "related_locations": ["loc_port_city"],
+      "tags": ["заговор", "церковь", "приказ"],
+      "discovered": false
+    },
+    {
+      "id": "clue_selina_note",
+      "name": "Предсмертная записка Селины",
+      "type": "document",
+      "description": "Недописанная записка второй жертвы: 'Они убили Маркуса за... Знали о книгах... Церковь...' Прервана смертью.",
+      "reliability": 80,
+      "related_characters": [],
+      "related_locations": ["loc_port_city"],
+      "tags": ["жертва", "церковь", "предсмертное"],
+      "discovered": false
+    },
+    {
+      "id": "clue_alex_confession",
+      "name": "Признание Алекса",
+      "type": "testimony",
+      "description": "Полное признание младшего Очистителя. Он совершил два убийства по приказу брата Теодора. Мучается совестью, готов свидетельствовать.",
+      "reliability": 95,
+      "related_characters": ["char_alex_swiftblade", "char_brother_theodore"],
+      "related_locations": ["loc_port_city"],
+      "tags": ["признание", "убийца", "свидетель"],
+      "discovered": false
+    },
+    {
+      "id": "clue_pirate_blade",
+      "name": "Пиратский клинок",
+      "type": "weapon",
+      "description": "Клинок пиратского типа, 'найденный' рядом с местом преступления. Подброшен, чтобы направить следствие по ложному пути.",
+      "reliability": 40,
+      "related_characters": ["char_captain_ironhand"],
+      "related_locations": ["loc_port_city"],
+      "tags": ["ложный след", "пираты", "подброшен"],
+      "discovered": false
     }
   ]
 }

@@ -93,6 +93,22 @@
         "fact_scholars_circle": 10
       },
       "controlled_locations": ["loc_port_city", "loc_trade_hub"]
+    },
+    {
+      "id": "fact_city_guard",
+      "name": "Городская Стража Нептары",
+      "type": "law_enforcement",
+      "description": "Местные стражники, поддерживающие порядок в портовом городе. Подчиняются Короне, но также зависят от финансирования Торговой Гильдии. Честны, но часто перегружены работой.",
+      "base_reputation": 0,
+      "current_reputation": 0,
+      "relations": {
+        "fact_crown": 30,
+        "fact_merchants_guild": 20,
+        "fact_eternal_light": 10,
+        "fact_house_stormhold": 5,
+        "fact_scholars_circle": 0
+      },
+      "controlled_locations": ["loc_port_city"]
     }
   ]
 }
