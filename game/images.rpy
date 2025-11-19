@@ -189,6 +189,168 @@ image char_merchant_thoughtful = Composite(
 )
 
 
+## Character Sprites - Капитан Бронислав Железная Длань
+image char_captain_neutral = Composite(
+    (400, 600),
+    (0, 0), Solid("#3a3a4a", xysize=(400, 600)),
+    (50, 50), Text("Капитан Железная Длань", size=20, color="#ffffff"),
+    (50, 500), Text("[Нейтральный]", size=18, color="#cccccc")
+)
+
+image char_captain_angry = Composite(
+    (400, 600),
+    (0, 0), Solid("#5a2a2a", xysize=(400, 600)),
+    (50, 50), Text("Капитан Железная Длань", size=20, color="#ffffff"),
+    (50, 500), Text("[Гневный]", size=18, color="#ff0000")
+)
+
+image char_captain_sad = Composite(
+    (400, 600),
+    (0, 0), Solid("#2a2a4a", xysize=(400, 600)),
+    (50, 50), Text("Капитан Железная Длань", size=20, color="#ffffff"),
+    (50, 500), Text("[Печальный]", size=18, color="#8888ff")
+)
+
+image char_captain_smug = Composite(
+    (400, 600),
+    (0, 0), Solid("#4a4a3a", xysize=(400, 600)),
+    (50, 50), Text("Капитан Железная Длань", size=20, color="#ffffff"),
+    (50, 500), Text("[Самодовольный]", size=18, color="#ffff00")
+)
+
+image char_captain_shocked = Composite(
+    (400, 600),
+    (0, 0), Solid("#4a2a4a", xysize=(400, 600)),
+    (50, 50), Text("Капитан Железная Длань", size=20, color="#ffffff"),
+    (50, 500), Text("[Шокирован]", size=18, color="#ff00ff")
+)
+
+image char_captain_fearful = Composite(
+    (400, 600),
+    (0, 0), Solid("#2a2a2a", xysize=(400, 600)),
+    (50, 50), Text("Капитан Железная Длань", size=20, color="#ffffff"),
+    (50, 500), Text("[Напуган]", size=18, color="#aaaaaa")
+)
+
+image char_captain_thoughtful = Composite(
+    (400, 600),
+    (0, 0), Solid("#3a4a3a", xysize=(400, 600)),
+    (50, 50), Text("Капитан Железная Длань", size=20, color="#ffffff"),
+    (50, 500), Text("[Задумчивый]", size=18, color="#88ff88")
+)
+
+
+## Character Sprites - Леди Изабелла Волнорез
+image char_isabella_neutral = Composite(
+    (400, 600),
+    (0, 0), Solid("#4a3a4a", xysize=(400, 600)),
+    (50, 50), Text("Леди Изабелла", size=24, color="#ffffff"),
+    (50, 500), Text("[Нейтральная]", size=18, color="#cccccc")
+)
+
+image char_isabella_angry = Composite(
+    (400, 600),
+    (0, 0), Solid("#5a2a3a", xysize=(400, 600)),
+    (50, 50), Text("Леди Изабелла", size=24, color="#ffffff"),
+    (50, 500), Text("[Гневная]", size=18, color="#ff0000")
+)
+
+image char_isabella_sad = Composite(
+    (400, 600),
+    (0, 0), Solid("#3a2a4a", xysize=(400, 600)),
+    (50, 50), Text("Леди Изабелла", size=24, color="#ffffff"),
+    (50, 500), Text("[Печальная]", size=18, color="#8888ff")
+)
+
+image char_isabella_fearful = Composite(
+    (400, 600),
+    (0, 0), Solid("#2a2a3a", xysize=(400, 600)),
+    (50, 50), Text("Леди Изабелла", size=24, color="#ffffff"),
+    (50, 500), Text("[Напугана]", size=18, color="#aaaaaa")
+)
+
+image char_isabella_shocked = Composite(
+    (400, 600),
+    (0, 0), Solid("#4a2a5a", xysize=(400, 600)),
+    (50, 50), Text("Леди Изабелла", size=24, color="#ffffff"),
+    (50, 500), Text("[Шокирована]", size=18, color="#ff00ff")
+)
+
+
+## Character Sprites - Брат Теодор Праведный
+image char_theodore_neutral = Composite(
+    (400, 600),
+    (0, 0), Solid("#2a2a2a", xysize=(400, 600)),
+    (50, 50), Text("Брат Теодор", size=24, color="#ffffff"),
+    (50, 500), Text("[Нейтральный]", size=18, color="#cccccc")
+)
+
+image char_theodore_angry = Composite(
+    (400, 600),
+    (0, 0), Solid("#5a1a1a", xysize=(400, 600)),
+    (50, 50), Text("Брат Теодор", size=24, color="#ffffff"),
+    (50, 500), Text("[Гневный]", size=18, color="#ff0000")
+)
+
+image char_theodore_smug = Composite(
+    (400, 600),
+    (0, 0), Solid("#4a3a2a", xysize=(400, 600)),
+    (50, 50), Text("Брат Теодор", size=24, color="#ffffff"),
+    (50, 500), Text("[Самодовольный]", size=18, color="#ffff00")
+)
+
+image char_theodore_pious = Composite(
+    (400, 600),
+    (0, 0), Solid("#3a3a4a", xysize=(400, 600)),
+    (50, 50), Text("Брат Теодор", size=24, color="#ffffff"),
+    (50, 500), Text("[Благочестивый]", size=18, color="#ffffff")
+)
+
+image char_theodore_shocked = Composite(
+    (400, 600),
+    (0, 0), Solid("#4a2a4a", xysize=(400, 600)),
+    (50, 50), Text("Брат Теодор", size=24, color="#ffffff"),
+    (50, 500), Text("[Шокирован]", size=18, color="#ff00ff")
+)
+
+
+## Character Sprites - Алекс 'Быстрый Клинок' Рифовый
+image char_alex_neutral = Composite(
+    (400, 600),
+    (0, 0), Solid("#2a3a3a", xysize=(400, 600)),
+    (50, 50), Text("Алекс 'Быстрый Клинок'", size=20, color="#ffffff"),
+    (50, 500), Text("[Нейтральный]", size=18, color="#cccccc")
+)
+
+image char_alex_angry = Composite(
+    (400, 600),
+    (0, 0), Solid("#5a2a2a", xysize=(400, 600)),
+    (50, 50), Text("Алекс 'Быстрый Клинок'", size=20, color="#ffffff"),
+    (50, 500), Text("[Гневный]", size=18, color="#ff0000")
+)
+
+image char_alex_sad = Composite(
+    (400, 600),
+    (0, 0), Solid("#2a2a4a", xysize=(400, 600)),
+    (50, 50), Text("Алекс 'Быстрый Клинок'", size=20, color="#ffffff"),
+    (50, 500), Text("[Печальный]", size=18, color="#8888ff")
+)
+
+image char_alex_fearful = Composite(
+    (400, 600),
+    (0, 0), Solid("#2a2a2a", xysize=(400, 600)),
+    (50, 50), Text("Алекс 'Быстрый Клинок'", size=20, color="#ffffff"),
+    (50, 500), Text("[Напуган]", size=18, color="#aaaaaa")
+)
+
+image char_alex_shocked = Composite(
+    (400, 600),
+    (0, 0), Solid("#4a2a4a", xysize=(400, 600)),
+    (50, 50), Text("Алекс 'Быстрый Клинок'", size=20, color="#ffffff"),
+    (50, 500), Text("[Шокирован]", size=18, color="#ff00ff")
+)
+
+
 ## Background Images - Locations
 image bg_stormhold_keep = Composite(
     (1920, 1080),
@@ -304,6 +466,10 @@ image side char_heir = Transform("char_heir_neutral", xsize=300, ysize=450)
 image side char_maester = Transform("char_maester_neutral", xsize=300, ysize=450)
 image side char_cardinal = Transform("char_cardinal_neutral", xsize=300, ysize=450)
 image side char_merchant = Transform("char_merchant_neutral", xsize=300, ysize=450)
+image side char_captain = Transform("char_captain_neutral", xsize=300, ysize=450)
+image side char_isabella = Transform("char_isabella_neutral", xsize=300, ysize=450)
+image side char_theodore = Transform("char_theodore_neutral", xsize=300, ysize=450)
+image side char_alex = Transform("char_alex_neutral", xsize=300, ysize=450)
 
 
 ## Animation transforms
