@@ -25,11 +25,7 @@ define gui.idle_color = "#888888"
 define gui.hover_color = "#ffffff"
 define gui.selected_color = "#ffcc00"
 
-## Images (placeholders)
-image gui/main_menu.png = "#1a1a2a"
-image bg black = "#000000"
-image bg stormhold_keep = "#2a3a4a"
-image bg throne_hall = "#3a2a1a"
+## Note: Images are now defined in images.rpy
 
 
 ## Initialization
@@ -115,6 +111,7 @@ label dialogue_scene:
 
     if not current_node:
         "Диалог завершён."
+        hide expression current_speaker_sprite
         jump investigation_phase
 
     # Get speaker character
@@ -122,8 +119,15 @@ label dialogue_scene:
         speaker = game_state.get_character(current_node.speaker_id)
         speaker_name = speaker.name if speaker else "???"
 
-    # Show character sprite (placeholder)
-    # show [speaker.get_sprite(current_node.emotion)]
+        # Get sprite for current emotion
+        if speaker:
+            current_speaker_sprite = speaker.get_sprite(current_node.emotion)
+        else:
+            current_speaker_sprite = None
+
+    # Show character sprite with emotion
+    if current_speaker_sprite:
+        show expression current_speaker_sprite at slide_in_left with dissolve
 
     # Display text
     "[speaker_name]" "[current_node.text]"
@@ -159,11 +163,32 @@ label dialogue_choice(choice):
 
 ## Investigation Phase
 label investigation_phase:
-    scene bg stormhold_keep with fade
+    # Hide any character sprites
+    hide expression current_speaker_sprite
 
+    # Show appropriate background based on current location
     python:
         current_location = map_manager.get_current_location()
         location_name = current_location.name if current_location else "Неизвестно"
+
+        # Map location IDs to background images
+        location_bg_map = {
+            "loc_stormhold_keep": "bg_stormhold_keep",
+            "loc_north_village": "bg_north_village",
+            "loc_capital_city": "bg_capital_city",
+            "loc_light_cathedral": "bg_light_cathedral",
+            "loc_port_city": "bg_port_city",
+            "loc_grand_library": "bg_grand_library",
+            "loc_holy_monastery": "bg_holy_monastery",
+            "loc_trade_hub": "bg_trade_hub"
+        }
+
+        if current_location and current_location.id in location_bg_map:
+            current_bg = location_bg_map[current_location.id]
+        else:
+            current_bg = "bg_stormhold_keep"
+
+    scene expression current_bg with fade
 
     "Вы находитесь: [location_name]"
 
@@ -231,18 +256,26 @@ label talk_to_character:
         character = game_state.get_character(target_char)
 
     if character:
+        # Show character sprite
+        python:
+            char_sprite = character.get_sprite("neutral")
+
+        show expression char_sprite at slide_in_left with dissolve
+
         "[character.name]" "Чем могу помочь?"
 
         # Simple conversation
         menu:
             "Расскажите о себе":
+                show expression character.get_sprite("neutral") with dissolve
                 "[character.name]" "[character.description]"
 
             "Что вы знаете об убийстве?":
+                show expression character.get_sprite("sad") with dissolve
                 "[character.name]" "Это ужасная трагедия..."
 
             "Назад":
-                pass
+                hide expression char_sprite with dissolve
 
     jump investigation_phase
 
