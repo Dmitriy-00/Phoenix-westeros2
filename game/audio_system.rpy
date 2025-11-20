@@ -162,7 +162,7 @@ define play_failure = Play("sound", audio.sfx_failure)
 
 
 ## Аудио каналы
-init:
+init python:
     # Канал для музыки
     renpy.music.register_channel("music", mixer="music", loop=True, stop_on_mute=True, tight=True, buffer_queue=True)
 

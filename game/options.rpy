@@ -34,12 +34,13 @@ define build.name = "ShadowsOverKingdom"
 define build.directory_name = "ShadowsOverKingdom-1.0"
 
 ## File patterns
-define build.classify('**~', None)
-define build.classify('**.bak', None)
-define build.classify('**/.**', None)
-define build.classify('**/#**', None)
-define build.classify('**/thumbs.db', None)
+init python:
+    build.classify('**~', None)
+    build.classify('**.bak', None)
+    build.classify('**/.**', None)
+    build.classify('**/#**', None)
+    build.classify('**/thumbs.db', None)
 
-## Documentation
-define build.documentation('*.html')
-define build.documentation('*.txt')
+    ## Documentation
+    build.documentation('*.html')
+    build.documentation('*.txt')

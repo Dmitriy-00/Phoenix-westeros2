@@ -252,12 +252,14 @@ screen evidence_journal_screen():
                             hbox:
                                 spacing 10
                                 for tag in selected_clue.tags:
-                                    text "[tag]":
-                                        size 14
-                                        color "#ffcc00"
+                                    frame:
                                         background "#333333"
                                         xpadding 10
                                         ypadding 5
+
+                                        text "[tag]":
+                                            size 14
+                                            color "#ffcc00"
                     else:
                         text "Выберите улику для просмотра деталей":
                             size 20
@@ -614,12 +616,12 @@ screen interrogation_screen(scene):
         xpos 50
         ypos 50
         background "#ff0000cc"
+        xpadding 20
+        ypadding 10
 
         text "Ошибки: [scene.current_mistakes]/[scene.max_mistakes]":
             size 20
             color "#ffffff"
-            xpadding 20
-            ypadding 10
 
     # Action buttons
     frame:
