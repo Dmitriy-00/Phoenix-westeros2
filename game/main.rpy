@@ -141,10 +141,15 @@ label dialogue_scene:
         available_choices = dialogue_manager.get_available_choices(current_node)
 
     if available_choices:
-        menu:
-            python:
-                for choice in available_choices:
-                    renpy.menu_item(choice.get("text", "..."), "dialogue_choice", choice)
+        python:
+            # Build menu items for renpy.display_menu
+            menu_items = [(choice.get("text", "..."), choice) for choice in available_choices]
+            selected_choice = renpy.display_menu(menu_items)
+
+            if selected_choice:
+                dialogue_manager.current_node_id = selected_choice.get("next_node")
+            else:
+                dialogue_manager.current_node_id = None
 
     else:
         # No choices, dialogue ends

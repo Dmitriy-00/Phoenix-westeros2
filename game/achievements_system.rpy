@@ -269,10 +269,11 @@ screen achievements_screen():
                     spacing 10
 
                     for ach in achievements_manager.get_achievements_list():
+                        $ ach_bg = "#2a2a3a" if ach.unlocked else "#1a1a1a"
                         frame:
                             padding (20, 15)
                             xsize 1100
-                            background "#2a2a3a" if ach.unlocked else "#1a1a1a"
+                            background ach_bg
 
                             hbox:
                                 spacing 20

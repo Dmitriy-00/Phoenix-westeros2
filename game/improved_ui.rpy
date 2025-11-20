@@ -12,7 +12,7 @@ screen main_menu():
     on "show" action Play("music", audio.menu_theme, fadein=1.0)
 
     # Фон
-    add "gui/main_menu.png"
+    add "gui_main_menu"
 
     # Главное меню
     frame:

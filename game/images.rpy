@@ -437,7 +437,7 @@ image ui_character_icon = Composite(
 
 
 ## Main Menu Background
-image gui/main_menu.png = Composite(
+image gui_main_menu = Composite(
     (1920, 1080),
     (0, 0), Solid("#0a0a1a"),
     (0, 0), im.Scale("bg_stormhold_keep", 1920, 1080),
@@ -446,7 +446,7 @@ image gui/main_menu.png = Composite(
     (760, 300), Text("Shadows Over the Kingdom", size=36, color="#ffffff", outlines=[(2, "#000000", 0, 0)])
 )
 
-image gui/game_menu.png = Composite(
+image gui_game_menu = Composite(
     (1920, 1080),
     (0, 0), Solid("#1a1a2a"),
     (0, 0), Solid("#000000cc", xysize=(1920, 1080))

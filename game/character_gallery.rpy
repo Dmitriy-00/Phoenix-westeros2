@@ -167,11 +167,12 @@ screen faction_codex_screen():
                                        "fact_city_guard"]:
 
                         $ unlocked = faction_id in character_gallery.unlocked_factions
+                        $ faction_bg = "#2a2a3a" if unlocked else "#1a1a1a"
 
                         frame:
                             padding (30, 20)
                             xsize 1300
-                            background "#2a2a3a" if unlocked else "#1a1a1a"
+                            background faction_bg
 
                             vbox:
                                 spacing 10
